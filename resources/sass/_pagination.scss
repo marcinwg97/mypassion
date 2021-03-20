@@ -1,0 +1,41 @@
+.page-item {
+    &.active {
+        .page-link {
+            background-color: #26272b;
+            border-color: #26272b;
+        }
+    }
+    &.pagination-prev-nav,
+    &.pagination-next-nav {
+        font-weight: bold;
+    }
+    &:first-child {
+        .page-link {
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+        }
+    }
+    &:last-child {
+        .page-link {
+            border-top-right-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+    }
+}
+.page-link {
+    border: unset;
+    color: #26272b;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin: 0 1.5px;
+
+    &:hover {
+        color: black;
+        border-color: #26272b;
+        background-color: lightgray;
+    }
+    &:focus {
+        outline: unset;
+        box-shadow: unset;
+    }
+}

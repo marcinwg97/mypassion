@@ -1,0 +1,338 @@
+body {
+    font-family: 'Fjalla One', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+footer {
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.sidebar-container {
+    position: fixed;
+    height: 100%;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: rgb(93, 109, 126);
+    color: #fff;
+}
+
+.sidebar-logo {
+    padding: 10px 15px 10px 30px;
+    font-size: 20px;
+    background-color: #2574A9;
+}
+
+.sidebar-navigation {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    position: relative;
+    li {
+        background-color: transparent;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        line-height: 20px;
+        &:before {
+            background-color: #5DADE2;
+            position: absolute;
+            content: '';
+            height: 100%;
+            left: 0;
+            top: 0;
+            -webkit-transition: width 0.2s ease-in;
+            transition: width 0.2s ease-in;
+            width: 3px;
+            z-index: -1;
+        }
+        a {
+            padding: 10px 15px 10px 30px;
+            display: block;
+            color: #fff;
+            &:hover,
+            &:focus,
+            &:active {
+                text-decoration: none;
+                outline: none;
+            }
+            &.sidebar-link {
+                &.active {
+                    background-color: #2e90d1;
+                }
+            }
+        }
+        .fa {
+            margin-right: 10px;
+        }
+    }
+    .header {
+        font-size: 12px;
+        text-transform: uppercase;
+        background-color: #151515;
+        padding: 10px 15px 10px 30px;
+        &:before {
+            background-color: transparent;
+        }
+    }
+}
+
+.sidebar-navigation li:hover::before {
+    width: 100%;
+}
+
+.site-footer {
+    background-color: #2574A9;
+    padding: 25px 0 20px;
+    font-size: 15px;
+    line-height: 24px;
+    color: white;
+    hr {
+        border-top-color: white;
+        opacity: 0.5;
+        &.small {
+            margin: 20px 0
+        }
+    }
+    h6 {
+        color: white;
+        font-size: 16px;
+        text-transform: uppercase;
+        margin-top: 5px;
+        letter-spacing: 2px;
+    }
+    a {
+        color: white;
+        &:hover {
+            color: white;
+            text-decoration: none;
+        }
+    }
+}
+
+.footer-links {
+    padding-left: 0;
+    list-style: none;
+    li {
+        display: block;
+    }
+    a {
+        color: white;
+        &:focus,
+        &:active,
+        &:hover {
+            color: white;
+            text-decoration: none;
+        }
+    }
+    &.inline {
+        li {
+            display: inline;
+        }
+    }
+}
+
+.copyright-text {
+    margin: 0
+}
+
+@media (max-width:991px) {
+    .site-footer [class^=col-] {
+        margin-bottom: 5px
+    }
+    .cont-mobile {
+        padding-left: unset;
+        padding-right: unset;
+    }
+    footer {
+        position: relative;
+    }
+}
+
+@media (max-width:767px) {
+    .site-footer {
+        padding-bottom: 0
+    }
+    .display-4 {
+        font-size: 3rem;
+    }
+}
+
+.navbar-nav {
+    .nav-link {
+        color: #5DADE2;
+        text-transform: uppercase; 
+        font-size: 20px;
+        a {
+            color: inherit;
+            &:hover {
+                color: #5DADE2;
+                text-transform: uppercase; 
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+.post-title {
+    color: rgb(37, 116, 169);
+    &:hover {
+        text-decoration: none;
+        color: rgb(37, 116, 169);
+    }
+}
+
+.social-buttons .facebook-share {
+    border-radius: 30px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    margin: auto 3px;
+    width: 30px;
+    font-size: 14px;
+    text-align: center;
+    background-color: #4267B2;
+    color: white;
+}
+
+.social-buttons .twitter-share {
+    border-radius: 30px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    margin: auto 3px;
+    width: 30px;
+    font-size: 14px;
+    background-color: #1DA1F2;
+    color: white;
+    text-align: center;
+}
+
+.social-buttons {
+    .twitter-share,
+    .facebook-share {
+        &:hover {
+            text-decoration: none;
+        }
+        &.focus {
+            text-decoration: none;
+        }
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    margin-bottom: 1.5rem;
+}
+
+.post-detail {
+    border-radius: 0.3rem;
+}
+
+.publish-day {
+    margin-bottom: 0.5rem;
+}
+
+.form-contact {
+    input,
+    textarea {
+        color: #010712;
+        font-weight: 500;
+        border: none;
+        border-bottom: 1px solid #818386;
+        padding: 0.5rem 0;
+        margin-bottom: 1rem;
+        outline: none;
+    }
+    input,
+    textarea,
+    label {
+        width: 40vw;
+        display: block;
+    }
+    textarea {
+        resize: none;
+    }
+    label {
+        color: #818386;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+    }
+}
+
+.button-form {
+    text-transform: uppercase;
+    font-weight: 300;
+    background: #3B3636;
+    color: #FCFDFD;
+    width: 10rem;
+    height: 2.25rem;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.publish-month {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.publish-day {
+    font-weight: 900;
+}
+
+.author-name {
+    font-size: 15px;
+}
+
+.read-more {
+    text-transform: uppercase;
+    font-weight: 300;
+    background: #3B3636;
+    color: #FCFDFD;
+    width: 10rem;
+    height: 2.25rem;
+    border: none;
+    border-radius: 2px;
+    padding: 5px;
+    outline: none;
+    cursor: pointer;
+    &:hover {
+        text-decoration: none;
+        color: #3B3636;
+        background: #FCFDFD;
+        border: 1px solid #3B3636;
+    }
+}
+
+.nav-link:hover {
+    border-bottom: 2px solid #5DADE2;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.card-title {
+    a, a:hover {
+        text-decoration: none;
+        color: black;
+    }
+}
