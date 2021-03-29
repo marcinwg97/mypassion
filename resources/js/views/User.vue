@@ -63,6 +63,7 @@ import PageLoader from "@components/PageLoader";
             });
             
         },
+        
         loadPosts:function(){
             axios.get('/api/user/posts/' + this.$route.params.id).then(res=>{
                 if(res.status==200){
