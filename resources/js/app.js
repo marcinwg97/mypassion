@@ -29,6 +29,7 @@ import AboutUs from './views/static/AboutUs'
 import Search from './views/search/Search'
 import SearchHelp from '@components/SearchHelp'
 import Data from './views/user/Data'
+import UserProfile from './views/User'
 
 Vue.use(VueRouter)
 
@@ -183,6 +184,11 @@ const router = new VueRouter({
             path: '/event/:id-:title',
             name: 'event-details',
             component: EventDetails
+        },
+        {
+            path: '/user/:id',
+            name: 'user-profile',
+            component: UserProfile
         },
     ],
 });

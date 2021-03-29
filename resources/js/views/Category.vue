@@ -56,33 +56,48 @@
             <div class="row">
                 <div class="col-lg-8 col-12">
                     <div class="row">
-                        <h1 class="text-center col-12 lead">Posty <a data-toggle="modal" data-target="#addPost" style="background-color: silver;padding: 5px;">+</a></h1>
-                        <div v-for="post in posts.data" :key="post.id" class="col-12 mb-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">{{ post.title }}</h4>
-                                    <p v-html="post.description" class="card-text"></p>
-                                    <router-link :to="{ name: 'post-details', params: { id: post.id, title: post.title }}" class="btn btn-info">Szczegóły</router-link>
-                                </div>
-                                <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
-                                    <div class="views">{{ post.date }}</div>
-                                </div>    
-                            </div>
+                        <h1 class="col-8 lead">Posty</h1>
+                        <div class="col-4 text-right">
+                        <a data-toggle="modal" data-target="#addPost" style="background-color: #5DADE2;padding: 10px;">Dodaj post</a>
                         </div>
+                        <div class="post-detail col-12 py-4 my-4" v-for="post in posts.data" :key="post.id">
+                            <div class="col-lg-2">
+                                <h2 class="publish-day">{{(post.date).substring(8,10)}}</h2>
+                                <div class="publish-month">{{monthName((post.date).substring(5,7))}} {{(post.date).substring(0,4)}}</div>
+                            </div>
+                            <div class="col-lg-10">
+                                <h2 class="post-title">
+                                    <router-link :to="{name: 'post-details', params: { id: post.id, title:  post.title}}" class="post-title">{{ post.title }}</router-link>
+                                </h2>
+                                <div class="author mb-3">
+                                    <span>
+                                        <i class="fas fa-pen-nib fa-lg"></i>
+                                        <span class="author-name" v-if="post.name">{{ post.name }}</span>
+                                        <span class="author-name" v-else><router-link :to="{name: 'user-profile', params: { id: post.user.id}}">{{ post.user.name }}</router-link></span>
+                                    </span>
+                                </div>
+                                <div class="post-description">
+                                    <p v-html="post.description_short" class="card-text"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 p-2 text-right">
+                                <router-link :to="{name: 'post-details', params: { id: post.id, title: post.title}}" class="read-more">Czytaj więcej</router-link>
+                            </div>
+                        </div>    
                     </div>
                 </div>
                 <div class="col-lg-4 col-12">
                     <div class="row">
                         <h1 class="text-center col-12 lead">Wydarzenia</h1>
-                        <div v-for="event in events.data" :key="event.id" class="col-12 mb-3">
+                        <div v-for="event in events.data" :key="event.id" class="col-12 py-4 my-4">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">{{ event.title }}</h4>
                                     <p v-html="event.description" class="card-text"></p>
-                                    <router-link :to="{ name: 'event-details', params: { id: event.id, title: event.title }}" class="btn btn-info">Szczegóły</router-link>
-                                </div>
-                                <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
                                     <div class="views">{{ event.date }}</div>
+                                </div>
+                                <div class="col-lg-12 p-2 text-right">
+                                    <router-link :to="{ name: 'event-details', params: { id: event.id, title: event.title }}" class="read-more">Szczegóły</router-link>
                                 </div>    
                             </div>
                         </div>
@@ -191,6 +206,9 @@
                         quill.setSelection(length + 1);
                     }
                 }
+            },
+            monthName:function(mon) {
+                return ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'][mon - 1];
             },
             loadPosts:function(page){
                 if (typeof page === 'undefined') {

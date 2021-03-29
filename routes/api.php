@@ -48,6 +48,10 @@ Route::get('admin/user/{id}', 'Api\Dashboard\UserController@edit');
 Route::post('admin/user/{id}', 'Api\Dashboard\UserController@update');
 Route::post('admin/users', 'Api\Dashboard\UserController@store');
 Route::post('admin/user/delete/{id}', 'Api\Dashboard\UserController@destroy');
+
+Route::post('event-add-user', 'Api\EventController@addUserToEvent');
+Route::get('event/user/{id}', 'Api\EventController@VerifyUserInEvent');
+Route::post('event-remove-user', 'Api\EventController@removeUserFromEvent');
 });
 
 //Api/Messages
@@ -76,6 +80,9 @@ Route::get('about-us', 'Api\StaticSiteController@aboutUs');
 Route::post('messages', 'Api\FormContactController@store');
 
 Route::get('category/{id}/{name}', 'Api\CategoryController@details');
+
+Route::get('/user/{id}', 'Api\UserController@details');
+Route::get('/user/posts/{id}', 'Api\UserController@postsByUser');
 
 //Search
 Route::get('search', 'Api\PostController@search');

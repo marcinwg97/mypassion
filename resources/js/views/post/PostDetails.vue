@@ -28,6 +28,7 @@
                 class="card-text"></p>
             </div>
         </div>
+        <h2 class="lead mt-2">Komentarze</h2>
     </div>
   </main-layout>
 </template>
