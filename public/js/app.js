@@ -620,18 +620,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: {},
-      posts: []
+      posts: [],
+      isAddToFavorite: false
     };
   },
   mounted: function mounted() {
     this.loadUser();
     this.loadPosts();
+    this.CheckIfUserIsAddToFavorite();
   },
   components: {
     MainLayout: _views_layout_Main__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -658,6 +666,37 @@ __webpack_require__.r(__webpack_exports__);
         }
       })["catch"](function (err) {
         console.log(err);
+      });
+    },
+    addUserToFavorite: function addUserToFavorite() {
+      axios.post('/api/favorite-add-user', {
+        favorite_user_id: this.$route.params.id,
+        user_id: this.user_id
+      }).then(function (response) {
+        $('#success').css("display", "block");
+        $('#success').html(response.data.message);
+      });
+    },
+    CheckIfUserIsAddToFavorite: function CheckIfUserIsAddToFavorite() {
+      var _this3 = this;
+
+      axios.get('/api/favorite/user/' + this.$route.params.id).then(function (res) {
+        if (res.status == 200) {
+          if (res.data == 1) {
+            _this3.isAddToFavorite = true;
+          }
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    removeUserFromFavorite: function removeUserFromFavorite() {
+      axios.post('/api/favorite-remove-user', {
+        favorite_user_id: this.$route.params.id,
+        user_id: this.user_id
+      }).then(function (response) {
+        $('#success').css("display", "block");
+        $('#success').html(response.data.message);
       });
     },
     monthName: function monthName(mon) {
@@ -3581,17 +3620,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       isLoading: true,
-      post: {}
+      post: {},
+      isAddToFavorite: false
     };
   },
   mounted: function mounted() {
     this.loadPost();
+    this.CheckIfPostIsAddToFavorite();
   },
   components: {
     MainLayout: _views_layout_Main__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -3614,6 +3661,37 @@ __webpack_require__.r(__webpack_exports__);
         }
       })["catch"](function (err) {
         console.log(err);
+      });
+    },
+    addPostToFavorite: function addPostToFavorite() {
+      axios.post('/api/favorite-add-post', {
+        post_id: this.$route.params.id,
+        user_id: this.user_id
+      }).then(function (response) {
+        $('#success').css("display", "block");
+        $('#success').html(response.data.message);
+      });
+    },
+    CheckIfPostIsAddToFavorite: function CheckIfPostIsAddToFavorite() {
+      var _this2 = this;
+
+      axios.get('/api/favorite/post/' + this.$route.params.id).then(function (res) {
+        if (res.status == 200) {
+          if (res.data == 1) {
+            _this2.isAddToFavorite = true;
+          }
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    removePostFromFavorite: function removePostFromFavorite() {
+      axios.post('/api/favorite-remove-post', {
+        post_id: this.$route.params.id,
+        user_id: this.user_id
+      }).then(function (response) {
+        $('#success').css("display", "block");
+        $('#success').html(response.data.message);
       });
     },
     monthName: function monthName(mon) {
@@ -38909,7 +38987,57 @@ var render = function() {
               )
             ]
           )
-        })
+        }),
+        _vm._v(" "),
+        _vm.isAddToFavorite == false
+          ? _c("div", { staticClass: "col-12" }, [
+              _c(
+                "form",
+                {
+                  staticClass: "col-12 col-lg-12",
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.addUserToFavorite($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Dodaj do ulubionych")]
+                  )
+                ]
+              )
+            ])
+          : _c("div", { staticClass: "col-12" }, [
+              _c(
+                "form",
+                {
+                  staticClass: "col-12 col-lg-12",
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.removeUserFromFavorite($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Usuń z ulubionych")]
+                  )
+                ]
+              )
+            ])
       ],
       2
     )
@@ -42034,6 +42162,56 @@ var render = function() {
                 ]
               )
             ]),
+            _vm._v(" "),
+            _vm.isAddToFavorite == false
+              ? _c("div", { staticClass: "col-12" }, [
+                  _c(
+                    "form",
+                    {
+                      staticClass: "col-12 col-lg-12",
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.addPostToFavorite($event)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Dodaj do ulubionych")]
+                      )
+                    ]
+                  )
+                ])
+              : _c("div", { staticClass: "col-12" }, [
+                  _c(
+                    "form",
+                    {
+                      staticClass: "col-12 col-lg-12",
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.removePostFromFavorite($event)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Usuń z ulubionych")]
+                      )
+                    ]
+                  )
+                ]),
             _vm._v(" "),
             _c("h2", { staticClass: "lead mt-2" }, [_vm._v("Komentarze")])
           ])

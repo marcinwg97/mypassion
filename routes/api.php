@@ -22,6 +22,7 @@ Route::get('logout', 'Api\Auth\LogoutController@logout');
 
 //Api/Posts
 Route::middleware('auth:api')->group(function () {
+
 Route::get('admin/posts', 'Api\Dashboard\PostController@index');
 Route::get('admin/post/{id}', 'Api\Dashboard\PostController@edit');
 Route::post('admin/post/{id}', 'Api\Dashboard\PostController@update');
@@ -52,8 +53,17 @@ Route::post('admin/user/delete/{id}', 'Api\Dashboard\UserController@destroy');
 Route::post('event-add-user', 'Api\EventController@addUserToEvent');
 Route::get('event/user/{id}', 'Api\EventController@VerifyUserInEvent');
 Route::post('event-remove-user', 'Api\EventController@removeUserFromEvent');
-});
 
+});
+Route::middleware('auth:api')->group(function () {
+Route::post('favorite-add-user', 'Api\UserController@addUserToFavorite');
+    Route::get('favorite/user/{id}', 'Api\UserController@VerifyUserFavorite');
+    Route::post('favorite-remove-user', 'Api\UserController@removeUserFromFavorite');
+    
+    Route::post('favorite-add-post', 'Api\PostController@addPostToFavorite');
+    Route::get('favorite/post/{id}', 'Api\PostController@VerifyPostFavorite');
+    Route::post('favorite-remove-post', 'Api\PostController@removePostFromFavorite');
+});
 //Api/Messages
 Route::get('admin/messages', 'Api\Dashboard\FormContactController@index');
 Route::post('admin/message/delete/{id}', 'Api\Dashboard\FormContactController@destroy');

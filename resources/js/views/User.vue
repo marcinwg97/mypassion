@@ -27,6 +27,12 @@
                 <router-link :to="{name: 'post-details', params: { id: post.id, title: post.title}}" class="read-more">Czytaj więcej</router-link>
             </div>
         </div> 
+        <div class="col-12" v-if="isAddToFavorite == false">
+            <form class="col-12 col-lg-12" @submit.prevent="addUserToFavorite"><button type="submit" class="btn btn-primary">Dodaj do ulubionych</button></form>
+        </div>
+        <div class="col-12" v-else>
+        <form class="col-12 col-lg-12" @submit.prevent="removeUserFromFavorite"><button type="submit" class="btn btn-primary">Usuń z ulubionych</button></form>
+        </div>
     </div>
     </main-layout>
 </template>
@@ -42,11 +48,13 @@ import PageLoader from "@components/PageLoader";
             return {
                 user: {},
                 posts: [],
+                isAddToFavorite: false,
             }
         },
          mounted(){
             this.loadUser();
             this.loadPosts();
+            this.CheckIfUserIsAddToFavorite();
         },
         components: {
             MainLayout,
@@ -73,6 +81,31 @@ import PageLoader from "@components/PageLoader";
                 console.log(err)
             });
             
+        },
+        addUserToFavorite(){
+            axios.post('/api/favorite-add-user',{favorite_user_id: this.$route.params.id, user_id: this.user_id})
+            .then((response)=>{
+                $('#success').css("display", "block");
+                $('#success').html(response.data.message);
+            })
+        },
+        CheckIfUserIsAddToFavorite() {
+            axios.get('/api/favorite/user/' + this.$route.params.id).then(res=>{
+            if(res.status==200){
+                if(res.data == 1) {
+                    this.isAddToFavorite = true; 
+                }
+            }
+            }).catch(err=>{
+                console.log(err)
+            });
+        },
+        removeUserFromFavorite() {
+            axios.post('/api/favorite-remove-user',{favorite_user_id: this.$route.params.id, user_id: this.user_id})
+            .then((response)=>{
+                $('#success').css("display", "block");
+                $('#success').html(response.data.message);
+            })
         },
         monthName:function(mon) {
             return ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'][mon - 1];

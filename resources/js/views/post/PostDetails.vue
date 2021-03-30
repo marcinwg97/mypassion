@@ -28,6 +28,12 @@
                 class="card-text"></p>
             </div>
         </div>
+        <div class="col-12" v-if="isAddToFavorite == false">
+            <form class="col-12 col-lg-12" @submit.prevent="addPostToFavorite"><button type="submit" class="btn btn-primary">Dodaj do ulubionych</button></form>
+        </div>
+        <div class="col-12" v-else>
+        <form class="col-12 col-lg-12" @submit.prevent="removePostFromFavorite"><button type="submit" class="btn btn-primary">Usuń z ulubionych</button></form>
+        </div>
         <h2 class="lead mt-2">Komentarze</h2>
     </div>
   </main-layout>
@@ -41,10 +47,12 @@ export default {
         return {
             isLoading: true,
             post: {},
+            isAddToFavorite: false,
         };
     },
     mounted() {
         this.loadPost();
+        this.CheckIfPostIsAddToFavorite();
     },
     components: {
         MainLayout,
@@ -72,6 +80,32 @@ export default {
             .catch(err => {
             console.log(err);
             });
+            
+        },
+        addPostToFavorite(){
+            axios.post('/api/favorite-add-post',{post_id: this.$route.params.id, user_id: this.user_id})
+            .then((response)=>{
+                $('#success').css("display", "block");
+                $('#success').html(response.data.message);
+            })
+        },
+        CheckIfPostIsAddToFavorite() {
+            axios.get('/api/favorite/post/' + this.$route.params.id).then(res=>{
+            if(res.status==200){
+                if(res.data == 1) {
+                    this.isAddToFavorite = true; 
+                }
+            }
+            }).catch(err=>{
+                console.log(err)
+            });
+        },
+        removePostFromFavorite() {
+            axios.post('/api/favorite-remove-post',{post_id: this.$route.params.id, user_id: this.user_id})
+            .then((response)=>{
+                $('#success').css("display", "block");
+                $('#success').html(response.data.message);
+            })
         },
         monthName: function(mon) {
             return [
