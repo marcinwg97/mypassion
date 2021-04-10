@@ -6,7 +6,22 @@
         </div>
         <ul class="sidebar-navigation">
             <li>
-                <sidebar-link :href="'test'" :active="$route.name == 'admin-posts'">Dane użytkownika</sidebar-link>
+                <sidebar-link :href="'user-data'" :active="$route.name == 'user-data'">Dane użytkownika</sidebar-link>
+            </li>
+            <li>
+                <sidebar-link :href="'user-posts'" :active="$route.name == 'user-posts'">Twoje posty</sidebar-link>
+            </li>
+            <li>
+                <sidebar-link :href="'user-events'" :active="$route.name == 'user-events'">Twoje wydarzenia</sidebar-link>
+            </li>
+            <li>
+            <sidebar-link :href="'favorite-post'" :active="$route.name == 'favorite-post'">Ulubione posty</sidebar-link>
+            </li>
+            <li>
+            <sidebar-link :href="'favorite-user'" :active="$route.name == 'favorite-user'">Ulubioni użytkownicy</sidebar-link>
+            </li>
+            <li>
+            <sidebar-link :href="'user-event-member'" :active="$route.name == 'user-event-member'">Wydarzenia, w których chcesz wziąć udział</sidebar-link>
             </li>
             <li>
                 <router-link :to="{ name: 'home' }">Powrót na stronę</router-link>

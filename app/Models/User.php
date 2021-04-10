@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Post', 'user_id');
     }
 
+    public function post_comment()
+    {
+        return $this->belongsTo('App\Models\PostComment', 'user_id');
+    }
+
     public function event()
     {
         return $this->belongsTo('App\Models\Event', 'user_id');

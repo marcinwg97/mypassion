@@ -83,7 +83,8 @@
                             <div class="col-lg-12 p-2 text-right">
                                 <router-link :to="{name: 'post-details', params: { id: post.id, title: post.title}}" class="read-more">Czytaj więcej</router-link>
                             </div>
-                        </div>    
+                        </div>  
+                        <pagination :data="posts" @pagination-change-page="loadPosts"></pagination>  
                     </div>
                 </div>
                 <div class="col-lg-4 col-12">
@@ -248,8 +249,10 @@
             addNewPost(){
                 axios.post('/api/admin/posts',{title: this.title, description: this.description, user_id: this.user_id, category_id: this.$route.params.id})
                 .then((response)=>{
+                    location.reload();
                     $('#success').css("display", "block");
                     $('#success').html(response.data.message);
+                    window.location.reload();
                 })
             },
             onEditorBlur(editor) {

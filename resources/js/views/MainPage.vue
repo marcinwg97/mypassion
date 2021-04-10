@@ -4,16 +4,48 @@
             <h1 class="lead text-center">Witamy na MyPassion!</h1>
             <div class="row">
                 <div v-for="category in categories" :key="category.id" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <div class="card">
-                        <div class="card-body">
+                    <div class="card dropdown">
+                        <div class="card-body" :id="'menu' + category.id" data-toggle="dropdown">
                             <div class="text-center">
                                 <i :class="`fas ${category.icon}  fa-5x`" style="color: #5D6D7E;"></i>
                             </div>    
-                            <h5 class="card-title text-center"><router-link :to="{ name: 'category-details', params: { id: category.id, name: category.name }}">{{category.name}}</router-link></h5>
+                            <h5 class="card-title text-center">{{category.name}}</h5>
                         </div>
+
+                        <ul class="dropdown-menu" role="menu" :aria-labelledby="'menu' + category.id" style="width: 100%; text-align: center;">
+                            <li v-for="children in category.children" :key="children.id">
+                                <router-link :to="{ name: 'category-details', params: { id: children.id, name: children.name }}" style="color: black !important">{{children.name}}</router-link>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
+            <h1 class="text-center">Najnowsze posty</h1>
+            <div class="post-detail col-12 py-4 my-4" v-for="post in posts.data" :key="post.id">
+                <div class="col-lg-2">
+                    <h2 class="publish-day">{{(post.date).substring(8,10)}}</h2>
+                    <div class="publish-month">{{monthName((post.date).substring(5,7))}} {{(post.date).substring(0,4)}}</div>
+                </div>
+                <div class="col-lg-10">
+                    <h2 class="post-title">
+                        <router-link :to="{name: 'post-details', params: { id: post.id, title:  post.title}}" class="post-title">{{ post.title }}</router-link>
+                    </h2>
+                    <div class="author mb-3">
+                        <span>
+                            <i class="fas fa-pen-nib fa-lg"></i>
+                            <span class="author-name" v-if="post.name">{{ post.name }}</span>
+                            <span class="author-name" v-else><router-link :to="{name: 'user-profile', params: { id: post.user.id}}">{{ post.user.name }}</router-link></span>
+                        </span>
+                    </div>
+                    <div class="post-description">
+                        <p v-html="post.description_short" class="card-text"></p>
+                    </div>
+                </div>
+                <div class="col-lg-12 p-2 text-right">
+                    <router-link :to="{name: 'post-details', params: { id: post.id, title: post.title}}" class="read-more">Czytaj więcej</router-link>
+                </div>
+            </div>  
+            <pagination :data="posts" @pagination-change-page="loadPosts"></pagination>  
         </div>
     </main-layout>
 </template>
@@ -27,10 +59,12 @@
         data() {
             return {
                 categories: [],
+                posts: {},
             }
         },
         mounted(){
             this.loadCategories();
+            this.loadPosts();
         },
         components: {
             MainLayout,
@@ -41,15 +75,36 @@
         methods:{
         
         loadCategories:function(){
-        
-        axios.get('/api/categories').then(res=>{
-       if(res.status==200){
-         this.categories=res.data;
-       }
-     }).catch(err=>{
-         console.log(err)
-     });
+            axios.
+            get('/api/categories').then(res=>{
+            if(res.status==200){
+                this.categories=res.data;
+            }
+            }).catch(err=>{
+                console.log(err)
+            });
+        },
+        loadPosts: function(page) {
+            if (typeof page === 'undefined') {
+                    page = 1;
+            }
+            axios.get('/api/posts' + '?page=' + page).then(res=>{
+                if(res.status==200){
+                    this.posts=res.data;
+                }
+            }).catch(err=>{
+                console.log(err)
+            });
+        },
+        monthName:function(mon) {
+            return ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'][mon - 1];
+        },
+        },
+        beforeRouteEnter (to, from, next) {
+        if ( ! localStorage.getItem('jwt')) {
+            return next('login')
         }
+        next()
         }
     }
 </script>

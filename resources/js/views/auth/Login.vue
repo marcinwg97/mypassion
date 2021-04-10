@@ -17,10 +17,11 @@
                         Zaloguj
                     </button>
                 </div>
+                <a style="color: black !important;" href="/register">Jeśli nie masz konta, zarejestruj się!</a>
             </form>
         </div>
     </div>
-</template>
+</template> 
 <style lang="scss" scoped>
     @media(min-width: 992px) {
         .auth-form {
@@ -70,7 +71,7 @@
                         localStorage.setItem('jwt',response.data.success.token)
 
                         if (localStorage.getItem('jwt') != null){
-                            this.$router.go('user-data')
+                            this.$router.go('home')
                         }
                     }).catch(function (error) {
                         console.error(error);

@@ -9,7 +9,7 @@ use Auth;
 class PostController extends Controller
 {
     public function index() {
-        return response()->json(Post::with(['category', 'user'])->paginate(5)->toArray());
+        return response()->json(Post::with(['category', 'user'])->where('user_id', Auth::user()->id)->paginate(5)->toArray());
     }
 
     public function edit($id) {
@@ -38,7 +38,7 @@ class PostController extends Controller
         $post->description = $request->description;
         $post->description_short = $request->description_short;
         $post->seo_keywords = $request->seo_keywords;
-        $post->is_active = $request->is_active == true ? 1 : 0;
+        $post->is_active = 1;
         $post->user_id = Auth::user()->id;
         $post->category_id = $request->category_id;
         $post->save();

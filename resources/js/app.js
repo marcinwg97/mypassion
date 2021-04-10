@@ -30,7 +30,13 @@ import Search from './views/search/Search'
 import SearchHelp from '@components/SearchHelp'
 import Data from './views/user/Data'
 import UserProfile from './views/User'
-
+import FavoritePost from './views/user/FavoritePost'
+import FavoriteUser from './views/user/FavoriteUser'
+import UserPost from './views/user/post/Post'
+import UserPostEdit from './views/user/post/PostEdit'
+import UserEvent from './views/user/event/Event'
+import UserEventEdit from './views/user/event/EventEdit'
+import EventMember from './views/user/EventMember'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -63,19 +69,9 @@ const router = new VueRouter({
             component: Dashboard,
         },
         {
-            path: '/admin/posts',
-            name: 'admin-posts',
-            component: Post,
-        },
-        {
             path: '/admin/posts/create',
             name: 'admin-posts-create',
             component: PostCreate,
-        },
-        {
-            path: '/admin/posts/:id/edit',
-            name: 'admin-posts-edit',
-            component: PostEdit,
         },
         {
             path: '/admin/categories',
@@ -162,9 +158,50 @@ const router = new VueRouter({
 
         // <!-- PANEL UZYTKOWNIKA
         {
-            path: '/user-data',
+            path: '/user/data',
             name: 'user-data',
             component: Data,
+        },
+
+        {
+            path: '/user/favorite-post',
+            name: 'favorite-post',
+            component: FavoritePost
+        },
+        {
+            path: '/user/favorite-user',
+            name: 'favorite-user',
+            component: FavoriteUser
+        },
+
+        {
+            path: '/user/event-member',
+            name: 'user-event-member',
+            component: EventMember
+        },
+
+        {
+            path: '/user/posts',
+            name: 'user-posts',
+            component: UserPost,
+        },
+
+        {
+            path: '/user/posts/:id/edit',
+            name: 'user-posts-edit',
+            component: UserPostEdit,
+        },
+
+        {
+            path: '/user/events',
+            name: 'user-events',
+            component: UserEvent,
+        },
+
+        {
+            path: '/user/events/:id/edit',
+            name: 'user-events-edit',
+            component: UserEventEdit,
         },
 
         // PANEL UZYTKOWNIKA -->

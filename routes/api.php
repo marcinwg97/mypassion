@@ -20,9 +20,11 @@ Route::post('login', 'Api\Auth\LoginController@login');
 Route::post('register', 'Api\Auth\RegisterController@register');
 Route::get('logout', 'Api\Auth\LogoutController@logout');
 
-//Api/Posts
+
+//Admin
 Route::middleware('auth:api')->group(function () {
 
+//Api/Posts
 Route::get('admin/posts', 'Api\Dashboard\PostController@index');
 Route::get('admin/post/{id}', 'Api\Dashboard\PostController@edit');
 Route::post('admin/post/{id}', 'Api\Dashboard\PostController@update');
@@ -50,49 +52,80 @@ Route::post('admin/user/{id}', 'Api\Dashboard\UserController@update');
 Route::post('admin/users', 'Api\Dashboard\UserController@store');
 Route::post('admin/user/delete/{id}', 'Api\Dashboard\UserController@destroy');
 
-Route::post('event-add-user', 'Api\EventController@addUserToEvent');
-Route::get('event/user/{id}', 'Api\EventController@VerifyUserInEvent');
-Route::post('event-remove-user', 'Api\EventController@removeUserFromEvent');
+
 
 });
+
+//UserProfile
 Route::middleware('auth:api')->group(function () {
-Route::post('favorite-add-user', 'Api\UserController@addUserToFavorite');
-    Route::get('favorite/user/{id}', 'Api\UserController@VerifyUserFavorite');
-    Route::post('favorite-remove-user', 'Api\UserController@removeUserFromFavorite');
+
+    //PostFavorite and UserFavorite
+    Route::get('user/post-favorite', 'Api\User\PostController@getPostsFavorite');
+    Route::get('user/user-favorite', 'Api\User\UserController@getUsersFavorite');
     
-    Route::post('favorite-add-post', 'Api\PostController@addPostToFavorite');
-    Route::get('favorite/post/{id}', 'Api\PostController@VerifyPostFavorite');
-    Route::post('favorite-remove-post', 'Api\PostController@removePostFromFavorite');
+    //EventMember
+    Route::get('user/event-member', 'Api\User\EventController@getEventWhereMember');
+    Route::post('user/event-member/delete/{id}', 'Api\User\EventController@deleteEventWhereMember');
+
+    //Posts
+
+    Route::get('user/posts', 'Api\User\PostController@index');
+    Route::get('user/post/{id}', 'Api\User\PostController@edit');
+    Route::post('user/post/{id}', 'Api\User\PostController@update');
+    Route::post('user/post/delete/{id}', 'Api\User\PostController@destroy');
+
+    //Events
+
+    
 });
-//Api/Messages
-Route::get('admin/messages', 'Api\Dashboard\FormContactController@index');
-Route::post('admin/message/delete/{id}', 'Api\Dashboard\FormContactController@destroy');
+
+//MainPage
+
+Route::get('posts', 'Api\PostController@getPostOnMainPage')->middleware('auth:api');
 
 //Posts
 Route::get('posts/category/{id}', 'Api\PostController@index');
 Route::get('post', 'Api\PostController@details');
+Route::get('comments/{id}', 'Api\CommentController@index');
 
 //Categories
 Route::get('categories', 'Api\CategoryController@index');
 Route::get('category/{id}', 'Api\CategoryController@details');
+Route::get('category/{id}/{name}', 'Api\CategoryController@details');
+Route::post('comment/store', 'Api\CommentController@store')->middleware('auth:api');
 
 //Events 
 Route::get('events/category/{id}', 'Api\EventController@index');
 Route::get('event', 'Api\EventController@details');
+Route::post('event-add-user', 'Api\EventController@addUserToEvent')->middleware('auth:api');
+Route::get('event/user/{id}', 'Api\EventController@VerifyUserInEvent')->middleware('auth:api');
+Route::post('event-remove-user', 'Api\EventController@removeUserFromEvent')->middleware('auth:api');
+
+//FavoritePost
+
+Route::post('favorite-add-post', 'Api\PostController@addPostToFavorite')->middleware('auth:api');
+Route::get('favorite/post/{id}', 'Api\PostController@VerifyPostFavorite')->middleware('auth:api');
+Route::post('favorite-remove-post', 'Api\PostController@removePostFromFavorite')->middleware('auth:api');
+
+//FavoriteUser
+
+Route::post('favorite-add-user', 'Api\UserController@addUserToFavorite')->middleware('auth:api');
+Route::get('favorite/user/{id}', 'Api\UserController@VerifyUserFavorite')->middleware('auth:api');
+Route::post('favorite-remove-user', 'Api\UserController@removeUserFromFavorite')->middleware('auth:api');
+    
+
+//Messages
+Route::post('messages', 'Api\FormContactController@store');
+
+//Users
+Route::get('/user/{id}', 'Api\UserController@details');
+Route::get('/user/posts/{id}', 'Api\UserController@postsByUser');
 
 //StaticSites
 Route::get('static-sites', 'Api\StaticSiteController@index');
 Route::get('static-site/{id}', 'Api\StaticSiteController@details');
 Route::get('mission', 'Api\StaticSiteController@mission');
 Route::get('about-us', 'Api\StaticSiteController@aboutUs');
-
-//Messages
-Route::post('messages', 'Api\FormContactController@store');
-
-Route::get('category/{id}/{name}', 'Api\CategoryController@details');
-
-Route::get('/user/{id}', 'Api\UserController@details');
-Route::get('/user/posts/{id}', 'Api\UserController@postsByUser');
 
 //Search
 Route::get('search', 'Api\PostController@search');

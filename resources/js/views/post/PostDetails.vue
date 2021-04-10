@@ -28,6 +28,7 @@
                 class="card-text"></p>
             </div>
         </div>
+        
         <div class="col-12" v-if="isAddToFavorite == false">
             <form class="col-12 col-lg-12" @submit.prevent="addPostToFavorite"><button type="submit" class="btn btn-primary">Dodaj do ulubionych</button></form>
         </div>
@@ -35,7 +36,21 @@
         <form class="col-12 col-lg-12" @submit.prevent="removePostFromFavorite"><button type="submit" class="btn btn-primary">Usuń z ulubionych</button></form>
         </div>
         <h2 class="lead mt-2">Komentarze</h2>
-    </div>
+        <div class="row">
+            <div v-for="comment in comments" :key="comment.id" class="col-12">
+                <p>{{comment.date}}, {{comment.user.name}}</p>
+                <p>{{comment.contents}}</p>         
+            </div>
+        </div>
+        <form class="col-12 col-lg-12" @submit.prevent="addComment">
+            <div class="form-group col-12">
+                <div>
+                    <input class="form-control" type="text" name="contents" v-model="contents" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Dodaj komentarz</button>
+        </form>
+    </div>    
   </main-layout>
 </template>
 <script>
@@ -47,12 +62,15 @@ export default {
         return {
             isLoading: true,
             post: {},
+            comments: [],
+            contents: '',
             isAddToFavorite: false,
         };
     },
     mounted() {
         this.loadPost();
         this.CheckIfPostIsAddToFavorite();
+        this.loadComments();
     },
     components: {
         MainLayout,
@@ -82,11 +100,25 @@ export default {
             });
             
         },
+        loadComments: function() {
+        axios
+            .get("/api/comments/" + this.$route.params.id)
+            .then(res => {
+            if (res.status == 200) {
+                this.comments = res.data;
+            }
+            })
+            .catch(err => {
+            console.log(err);
+            });
+            
+        },
         addPostToFavorite(){
             axios.post('/api/favorite-add-post',{post_id: this.$route.params.id, user_id: this.user_id})
             .then((response)=>{
                 $('#success').css("display", "block");
                 $('#success').html(response.data.message);
+                window.location.reload();
             })
         },
         CheckIfPostIsAddToFavorite() {
@@ -100,11 +132,20 @@ export default {
                 console.log(err)
             });
         },
+        addComment(){
+            axios.post('/api/comment/store',{post_id: this.$route.params.id, user_id: this.user_id, contents: this.contents})
+            .then((response)=>{
+                $('#success').css("display", "block");
+                $('#success').html(response.data.message);
+                window.location.reload();
+            })
+        },
         removePostFromFavorite() {
             axios.post('/api/favorite-remove-post',{post_id: this.$route.params.id, user_id: this.user_id})
             .then((response)=>{
                 $('#success').css("display", "block");
                 $('#success').html(response.data.message);
+                window.location.reload();
             })
         },
         monthName: function(mon) {

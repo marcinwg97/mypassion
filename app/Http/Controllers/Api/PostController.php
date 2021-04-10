@@ -8,12 +8,21 @@ use App\Models\Post;
 use DB;
 use App\Models\User;
 use App\Models\PostFavorite;
+use App\Models\UserFavorite;
 use Auth;
 
 class PostController extends Controller
 {
     public function index($id) {
-        return response()->json(Post::where('category_id', $id)->with(['category', 'user'])->paginate(5)->toArray());
+        return response()->json(Post::where('category_id', $id)->with(['category', 'user'])->orderBy('id', 'desc')->paginate(5)->toArray());
+    }
+    public function getPostOnMainPage() {
+        $users = UserFavorite::where('user_id', Auth::user()->id)->get();
+        $u = array();
+        foreach($users as $user) {
+            $u[] = $user->favorite_user_id;
+        }
+        return response()->json(Post::whereIn('user_id', $u)->with(['category', 'user'])->orderBy('id', 'desc')->paginate(5)->toArray());
     }
     public function details(Request $request) {
         return response()->json(Post::where('id', $request->id)->where('title', $request->title)->first()->toArray());

@@ -87,6 +87,7 @@ import PageLoader from "@components/PageLoader";
             .then((response)=>{
                 $('#success').css("display", "block");
                 $('#success').html(response.data.message);
+                window.location.reload();
             })
         },
         CheckIfUserIsAddToFavorite() {
@@ -105,6 +106,7 @@ import PageLoader from "@components/PageLoader";
             .then((response)=>{
                 $('#success').css("display", "block");
                 $('#success').html(response.data.message);
+                window.location.reload();
             })
         },
         monthName:function(mon) {
