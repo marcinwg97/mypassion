@@ -77,7 +77,7 @@ Route::middleware('auth:api')->group(function () {
     //User
     Route::get('user', 'Api\User\UserController@index');
     Route::post('user', 'Api\User\UserController@update');
-
+        
     //Events
 
     
