@@ -74,6 +74,10 @@ Route::middleware('auth:api')->group(function () {
     Route::post('user/post/{id}', 'Api\User\PostController@update');
     Route::post('user/post/delete/{id}', 'Api\User\PostController@destroy');
 
+    //User
+    Route::get('user', 'Api\User\UserController@index');
+    Route::post('user', 'Api\User\UserController@update');
+
     //Events
 
     
@@ -100,6 +104,7 @@ Route::get('event', 'Api\EventController@details');
 Route::post('event-add-user', 'Api\EventController@addUserToEvent')->middleware('auth:api');
 Route::get('event/user/{id}', 'Api\EventController@VerifyUserInEvent')->middleware('auth:api');
 Route::post('event-remove-user', 'Api\EventController@removeUserFromEvent')->middleware('auth:api');
+Route::post('events', 'Api\EventController@addEvent')->middleware('auth:api');
 
 //FavoritePost
 

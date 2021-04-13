@@ -11,6 +11,23 @@ use Auth;
 
 class UserController extends Controller
 {
+    public function index() {
+        return response()->json(User::where('id', Auth::user()->id)->first()->toArray());
+    }
+    public function update(Request $request) {
+        $user = new User;
+        $user->name = $request->name;
+        $user->biography = $request->biography;
+        $user->profile_img = $request->profile_img;
+        $user->facebook_link = $request->facebook_link; 
+        $user->instagram_link  = $request->instagram_link;
+        $user->twitter_link  = $request->twitter_link;
+        $user->save();
+
+        return response()->json([
+            'message' => 'Dodano nowe wydarzenie'
+        ]);
+    }
     public function getUsersFavorite() {
         $users = UserFavorite::where('user_id', Auth::user()->id)->get();
         $u = array();

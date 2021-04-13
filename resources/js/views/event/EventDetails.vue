@@ -85,6 +85,7 @@ export default {
             .then((response)=>{
                 $('#success').css("display", "block");
                 $('#success').html(response.data.message);
+                window.location.reload();
             })
         },
         CheckIfUserIsAddToEvent() {
@@ -103,6 +104,7 @@ export default {
             .then((response)=>{
                 $('#success').css("display", "block");
                 $('#success').html(response.data.message);
+                window.location.reload();
             })
         },
         monthName: function(mon) {

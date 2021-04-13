@@ -31,6 +31,21 @@ class EventController extends Controller
         ]);
     }
 
+    public function addEvent(Request $request) {
+
+        $event = new Event;
+        $event->title = $request->title;
+        $event->description = $request->description;
+        $event->date = $request->date; 
+        $event->user_id = Auth::user()->id;
+        $event->category_id = $request->category_id;
+        $event->save();
+
+        return response()->json([
+            'message' => 'Dodano nowe wydarzenie'
+        ]);
+    }
+
     public function VerifyUserInEvent($id) {
         $event_user = EventMember::where('event_id', $id)->where('user_id', Auth::user()->id)->first();
         if($event_user) {
