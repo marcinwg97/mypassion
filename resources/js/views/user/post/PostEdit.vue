@@ -144,7 +144,7 @@
         },
         methods:{
             loadPost:function(){
-                axios.get('/api/admin/post/' + this.$route.params.id).then(res=>{
+                axios.get('/api/user/post/' + this.$route.params.id).then(res=>{
                     if(res.status==200){
                         this.post=res.data;
                     }
@@ -153,7 +153,7 @@
                 });
             },
             editPost(id){
-                axios.post('/api/admin/post/' + id, {title: this.post.title, description: this.post.description, description_short: this.post.description_short, seo_keywords: this.post.seo_keywords, is_active: this.post.is_active})
+                axios.post('/api/user/post/' + id, {title: this.post.title, description: this.post.description, description_short: this.post.description_short, seo_keywords: this.post.seo_keywords, is_active: this.post.is_active})
                 .then((response)=>{
                     $('#success').css("display", "block");
                     $('#success').html(response.data.message);

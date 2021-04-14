@@ -1,20 +1,20 @@
 <template>
     <user-layout>
         <div class="container">
-    <div id="success" style="display: none" class="alert alert-success" role="alert">
+        <div id="success" style="display: none" class="alert alert-success" role="alert">
         </div>
-        <form class="col-12 col-lg-12" v-on:submit.prevent="editPost(post.id)">
+        <form class="col-12 col-lg-12" v-on:submit.prevent="editEvent(event.id)">
             <div class="form-group row">
                 <div class="form-group col-12">
                     <label for="title" class="col-form-label">Tytuł:</label>
                     <div>
-                        <input class="form-control" type="text" name="title" v-model="post.title" required>
+                        <input class="form-control" type="text" name="title" v-model="event.title" required>
                     </div>
                 </div>
                 <div class="form-group col-12">
                     <label for="description" class="col-form-label">Opis:</label>
                     <div>
-                        <quill-editor v-model="post.description"
+                        <quill-editor v-model="event.description"
                             class="mb-3"
                             id="rich-text"
                             rows="20"
@@ -24,6 +24,18 @@
                             @focus="onEditorFocus($event)"
                             @ready="onEditorReady($event)">
                         </quill-editor>
+                    </div>
+                </div>
+                <div class="form-group col-12">
+                    <label for="date" class="col-form-label">Data wydarzenia:</label>
+                    <div>
+                        <input type="datetime-local" id="date" name="date" v-model="event.date" required>
+                    </div>
+                </div>
+                <div class="form-group col-12">
+                    <label for="date" class="col-form-label">Miejsce wydarzenia:</label>
+                    <div>
+                        <input type="text" id="place" name="place" v-model="event.place" required>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Zapisz</button>
@@ -109,12 +121,11 @@
         },
         data() {
             return {
-                post: {
+                event: {
                     title: '',
                     description: '',
-                    is_active: '',
-                    description_short: '',
-                    seo_keywords: '',
+                    date: '',
+                    place: '',
                 },
 
                 editorOption: {
@@ -140,24 +151,24 @@
             }
         },
         mounted(){
-            this.loadPost();
+            this.loadEvent();
         },
         methods:{
-            loadPost:function(){
-                axios.get('/api/admin/post/' + this.$route.params.id).then(res=>{
+            loadEvent:function(){
+                axios.get('/api/user/event/' + this.$route.params.id).then(res=>{
                     if(res.status==200){
-                        this.post=res.data;
+                        this.event=res.data;
                     }
                 }).catch(err=>{
                     console.log(err)
                 });
             },
-            editPost(id){
-                axios.post('/api/admin/post/' + id, {title: this.post.title, description: this.post.description, description_short: this.post.description_short, seo_keywords: this.post.seo_keywords, is_active: this.post.is_active})
+            editEvent(id){
+                axios.post('/api/user/event/' + id, {title: this.event.title, description: this.event.description, place: this.event.place, date: this.event.date })
                 .then((response)=>{
                     $('#success').css("display", "block");
                     $('#success').html(response.data.message);
-                    this.loadPost();
+                    this.loadEvent();
                 })
             },
             onEditorBlur(editor) {

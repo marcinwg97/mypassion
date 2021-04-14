@@ -74,6 +74,11 @@ Route::middleware('auth:api')->group(function () {
     Route::post('user/post/{id}', 'Api\User\PostController@update');
     Route::post('user/post/delete/{id}', 'Api\User\PostController@destroy');
 
+    Route::get('user/events', 'Api\User\EventController@index');
+    Route::get('user/event/{id}', 'Api\User\EventController@edit');
+    Route::post('user/event/{id}', 'Api\User\EventController@update');
+    Route::post('user/event/delete/{id}', 'Api\User\EventController@destroy');
+
     //User
     Route::get('user', 'Api\User\UserController@index');
     Route::post('user', 'Api\User\UserController@update');

@@ -27,4 +27,34 @@ class EventController extends Controller
             'message' => 'Wydarzenie zostało usunięte'
         ]);
     }
+
+    public function index() {
+        return response()->json(Event::with(['category', 'user'])->where('user_id', Auth::user()->id)->paginate(5)->toArray());
+    }
+
+    public function edit($id) {
+        return response()->json(Event::where('id', $id)->first()->toArray());
+    }
+
+    public function update(Request $request, $id) {
+        $event = Event::where('id', $id)->first();
+        $event->title = $request->title;
+        $event->date = $request->date;
+        $event->description = $request->description;
+        $event->place = $request->place;
+        $event->save();
+
+        return response()->json([
+            'message' => 'Wydarzenie zostało zaktualizowane'
+        ]);
+    }
+
+    public function destroy($id) {
+        $post = Event::where('id', $id)->first();
+        $post->delete();
+
+        return response()->json([
+            'message' => 'Wydarzenie zostało usunięte'
+        ]);
+    }
 }

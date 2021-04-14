@@ -4,24 +4,18 @@
             <table class="table">
                 <thead class="thead-light">
                     <tr>
-                        <th>ID</th>
                         <th>Tytuł</th>
                         <th>Data</th>
-                        <th>Użytkownik</th>
-                        <th>Aktywny</th>
-                        <th>Opis</th>
+                        <th>Kategoria</th>
                         <th>Edytuj</th>
                         <th>Usuń</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="post in posts.data" :key="post.id">
-                        <td>{{ post.id }}</td>
                         <td>{{ post.title }}</td>
                         <td>{{ post.date }}</td>
-                        <td>{{ post.user.email }}</td>
-                        <td>{{ post.is_active == 1 ? 'TAK' : 'NIE'}}</td>
-                        <td>{{ post.description }}</td>
+                        <td>{{ post.category.name }}</td>
                         <td><button class="btn btn-warning"><router-link style="color: white !important;" :to="{ name: 'user-posts-edit', params: { id: post.id }}">Edytuj</router-link></button></td>
                         <td><form @submit.prevent="deletePost(post.id)"><button type="submit" class="btn btn-danger">Usuń</button></form></td>
                     </tr>
@@ -90,7 +84,7 @@
                 if (typeof page === 'undefined') {
                     page = 1;
                 }
-                axios.get('/api/admin/posts?page=' + page).then(res=>{
+                axios.get('/api/user/posts?page=' + page).then(res=>{
                     if(res.status==200){
                         this.posts=res.data;
                     }
@@ -99,7 +93,7 @@
                 });
             },
             deletePost(id){
-                axios.post('/api/admin/post/delete/' + id).then((response)=>{
+                axios.post('/api/user/post/delete/' + id).then((response)=>{
                     $('#success').html(response.data.message)
                     this.loadPosts();
                 })

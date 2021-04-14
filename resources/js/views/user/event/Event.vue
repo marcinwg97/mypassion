@@ -1,34 +1,29 @@
 <template>
     <user-layout>
-        <div class="pb-2">
-            <button class="btn btn-success"><router-link style="color: white !important;" :to="{ name: 'admin-posts-create'}">Dodaj</router-link></button>
-        </div>
         <div class="card-body table-responsive p-0">
             <table class="table">
                 <thead class="thead-light">
                     <tr>
-                        <th>ID</th>
                         <th>Tytuł</th>
                         <th>Data</th>
-                        <th>Użytkownik</th>
-                        <th>Aktywny</th>
+                        <th>Kategoria</th>
                         <th>Opis</th>
+                        <th>Miejsce wydarzenia</th>
                         <th>Edytuj</th>
                         <th>Usuń</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="post in posts.data" :key="post.id">
-                        <td>{{ post.id }}</td>
-                        <td>{{ post.title }}</td>
-                        <td>{{ post.date }}</td>
-                        <td>{{ post.user.email }}</td>
-                        <td>{{ post.is_active == 1 ? 'TAK' : 'NIE'}}</td>
-                        <td>{{ post.description }}</td>
-                        <td><button class="btn btn-warning"><router-link style="color: white !important;" :to="{ name: 'admin-posts-edit', params: { id: post.id }}">Edytuj</router-link></button></td>
-                        <td><form @submit.prevent="deletePost(post.id)"><button type="submit" class="btn btn-danger">Usuń</button></form></td>
+                    <tr v-for="event in events.data" :key="event.id">
+                        <td>{{ event.title }}</td>
+                        <td>{{ event.date }}</td>
+                        <td>{{ event.category.name }}</td>
+                        <td>{{ event.description }}</td>
+                        <td>{{ event.place }}</td>
+                        <td><button class="btn btn-warning"><router-link style="color: white !important;" :to="{ name: 'user-events-edit', params: { id: event.id }}">Edytuj</router-link></button></td>
+                        <td><form @submit.prevent="deleteEvent(event.id)"><button type="submit" class="btn btn-danger">Usuń</button></form></td>
                     </tr>
-                    <pagination :data="posts" @pagination-change-page="loadPosts"></pagination>
+                    <pagination :data="events" @pagination-change-page="loadEvents"></pagination>
                 </tbody>
             </table>
         </div>
@@ -77,34 +72,34 @@
     export default {
         data() {
             return {
-                posts: {},
+                events: {},
                 title: '',
                 description: '',
             }
         },
         mounted(){
-            this.loadPosts();
+            this.loadEvents();
         },
         components: {
             UserLayout,
         },
         methods:{
-            loadPosts:function(page){
+            loadEvents:function(page){
                 if (typeof page === 'undefined') {
                     page = 1;
                 }
-                axios.get('/api/admin/posts?page=' + page).then(res=>{
+                axios.get('/api/user/events?page=' + page).then(res=>{
                     if(res.status==200){
-                        this.posts=res.data;
+                        this.events=res.data;
                     }
                 }).catch(err=>{
                     console.log(err)
                 });
             },
-            deletePost(id){
-                axios.post('/api/admin/post/delete/' + id).then((response)=>{
+            deleteEvent(id){
+                axios.post('/api/user/event/delete/' + id).then((response)=>{
                     $('#success').html(response.data.message)
-                    this.loadPosts();
+                    this.loadEvents();
                 })
             },
         }
