@@ -28,6 +28,17 @@ class UserController extends Controller
             'message' => 'Dane zostały zaktualizowane'
         ]);
     }
+
+    public function updateAvatar(Request $request) {
+        $user = User::where('id', Auth::user()->id)->first();
+        if($request->file != NULL) {
+            $file = $request->file->path();
+            $filedata = base64_encode(file_get_contents($file));
+            $src = 'data:'.mime_content_type($file).';base64,'.$filedata;
+            $user->profile_img = $src;
+            $user->save();
+        }
+    }
     public function getUsersFavorite() {
         $users = UserFavorite::where('user_id', Auth::user()->id)->get();
         $u = array();

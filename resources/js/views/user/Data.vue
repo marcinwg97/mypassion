@@ -3,8 +3,23 @@
         <div class="container">
     <div id="success" style="display: none" class="alert alert-success" role="alert">
         </div>
+        <form @submit="formSubmit" enctype="multipart/form-data">
+        <div class="profile-header-container">
+                    <div class="profile-header-img text-center">
+                        <img class="rounded-circle" v-bind:src="user.profile_img" style="height: 25%; width: 25%;" />
+                        <!-- badge -->
+                        <div class="custom-file">
+                    <!-- MOST IMPORTANT - SEE "ref" AND "@change" PROPERTIES -->
+                    <input type="file" class="form-control" v-on:change="onFileChange">
+                  </div>
+                        
+                    </div>
+                </div>
+                <button class="btn btn-success">Zmień avatar</button>
+        </form>
         <form class="col-12 col-lg-12" v-on:submit.prevent="editUser(user.id)">
             <div class="form-group row">
+                
                 <div class="form-group col-12">
                     <label for="title" class="col-form-label">Nazwa:</label>
                     <div>
@@ -134,7 +149,8 @@
                     twitter_link: '',
                     instagram_link: '',
                 },
-
+                avatar: '',
+                avatarName: '',
                 editorOption: {
                     modules: {
                         toolbar: {
@@ -187,6 +203,29 @@
             onEditorReady(editor) {
                 // console.log('editor ready!', editor)
             },
+            onFileChange(e){
+                console.log(e.target.files[0]);
+                this.avatar = e.target.files[0];
+                this.avatarName = this.avatar.name;
+            },
+            formSubmit(e) {
+                e.preventDefault();
+                let currentObj = this;
+   
+                const config = {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+    
+                let formData = new FormData();
+                formData.append('file', this.avatar);
+                axios.post('/api/user/avatar', formData, config)
+                .then(function (response) {
+                    window.location.reload();
+                })
+                .catch(function (error) {
+                    currentObj.output = error;
+                });
+            }
         },
         computed: {
             editor(){
