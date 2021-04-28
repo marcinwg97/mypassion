@@ -1,118 +1,109 @@
 <template>
     <main-layout>
         <div class="container">
-
             <div class="modal" id="addPost">
                 <div class="modal-dialog">
                     <div class="modal-content">
-            
                         <!-- Modal Header -->
                         <div class="modal-header">
                             <h4 class="modal-title">Dodaj post</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
-                
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <div id="success" style="display: none" class="alert alert-success" role="alert">
+                            <div id="success" style="display: none" class="alert alert-success" role="alert"></div>
+                            <form class="col-12 col-lg-12" @submit.prevent="addNewPost">
+                                <div class="form-group row">
+                                    <div class="form-group col-12">
+                                        <label for="title" class="col-form-label">Tytuł:</label>
+                                        <div>
+                                            <input class="form-control" type="text" name="title" v-model="title" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label for="description" class="col-form-label">Opis:</label>
+                                        <div>
+                                            <quill-editor v-model="description"
+                                                class="mb-3"
+                                                id="rich-text"
+                                                rows="20"
+                                                :options="editorOption"
+                                                ref="myQuillEditor"
+                                                @blur="onEditorBlur($event)"
+                                                @focus="onEditorFocus($event)"
+                                                @ready="onEditorReady($event)">
+                                            </quill-editor>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Zapisz</button>
+                                </div>
+                            </form>
                         </div>
-                        <form class="col-12 col-lg-12" @submit.prevent="addNewPost">
-                            <div class="form-group row">
-                                <div class="form-group col-12">
-                                    <label for="title" class="col-form-label">Tytuł:</label>
-                                    <div>
-                                        <input class="form-control" type="text" name="title" v-model="title" required>
-                                    </div>
-                                </div>
-                                <div class="form-group col-12">
-                                    <label for="description" class="col-form-label">Opis:</label>
-                                    <div>
-                                        <quill-editor v-model="description"
-                                            class="mb-3"
-                                            id="rich-text"
-                                            rows="20"
-                                            :options="editorOption"
-                                            ref="myQuillEditor"
-                                            @blur="onEditorBlur($event)"
-                                            @focus="onEditorFocus($event)"
-                                            @ready="onEditorReady($event)">
-                                        </quill-editor>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Zapisz</button>
-                            </div>
-                        </form>
-                    </div>
-                
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Zamknij</button>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Zamknij</button>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div class="modal" id="addEvent">
                 <div class="modal-dialog">
                     <div class="modal-content">
-            
                         <!-- Modal Header -->
                         <div class="modal-header">
                             <h4 class="modal-title">Dodaj wydarzenie</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
-                
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <div id="success" style="display: none" class="alert alert-success" role="alert">
+                            <div id="success" style="display: none" class="alert alert-success" role="alert"></div>
+                            <form class="col-12 col-lg-12" @submit.prevent="addNewEvent">
+                                <div class="form-group row">
+                                    <div class="form-group col-12">
+                                        <label for="title" class="col-form-label">Tytuł:</label>
+                                        <div>
+                                            <input class="form-control" type="text" name="title_event" v-model="title_event" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label for="date" class="col-form-label">Data wydarzenia:</label>
+                                        <div>
+                                            <input type="datetime-local" id="date" name="date" v-model="date" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label for="description" class="col-form-label">Opis:</label>
+                                        <div>
+                                            <quill-editor v-model="description_event"
+                                                class="mb-3"
+                                                id="rich-text"
+                                                rows="20"
+                                                :options="editorOption"
+                                                ref="myQuillEditor"
+                                                @blur="onEditorBlur($event)"
+                                                @focus="onEditorFocus($event)"
+                                                @ready="onEditorReady($event)">
+                                            </quill-editor>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Zapisz</button>
+                                </div>
+                            </form>
                         </div>
-                        <form class="col-12 col-lg-12" @submit.prevent="addNewEvent">
-                            <div class="form-group row">
-                                <div class="form-group col-12">
-                                    <label for="title" class="col-form-label">Tytuł:</label>
-                                    <div>
-                                        <input class="form-control" type="text" name="title_event" v-model="title_event" required>
-                                    </div>
-                                </div>
-                                <div class="form-group col-12">
-                                    <label for="date" class="col-form-label">Data wydarzenia:</label>
-                                    <div>
-                                        <input type="datetime-local" id="date" name="date" v-model="date" required>
-                                    </div>
-                                </div>
-                                <div class="form-group col-12">
-                                    <label for="description" class="col-form-label">Opis:</label>
-                                    <div>
-                                        <quill-editor v-model="description_event"
-                                            class="mb-3"
-                                            id="rich-text"
-                                            rows="20"
-                                            :options="editorOption"
-                                            ref="myQuillEditor"
-                                            @blur="onEditorBlur($event)"
-                                            @focus="onEditorFocus($event)"
-                                            @ready="onEditorReady($event)">
-                                        </quill-editor>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Zapisz</button>
-                            </div>
-                        </form>
-                    </div>
-                
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Zamknij</button>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Zamknij</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
-            <h1 class="text-center col-12 lead">Kategoria {{category.name}}</h1>
+            <h1 class="text-center col-12">{{category.name}}</h1>
             <div class="row">
                 <div class="col-lg-8 col-12">
                     <div class="row">
                         <h1 class="col-8 lead">Posty</h1>
                         <div class="col-4 text-right">
-                        <a data-toggle="modal" data-target="#addPost" style="background-color: #5DADE2;padding: 10px;">Dodaj post</a>
+                            <a class="btn btn-primary" data-toggle="modal" data-target="#addPost">Dodaj post</a>
                         </div>
                         <div class="post-detail col-12 py-4 my-4" v-for="post in posts.data" :key="post.id">
                             <div class="col-lg-2">
@@ -137,36 +128,36 @@
                             <div class="col-lg-12 p-2 text-right">
                                 <router-link :to="{name: 'post-details', params: { id: post.id, title: post.title}}" class="read-more">Czytaj więcej</router-link>
                             </div>
-                        </div>  
-                        <pagination :data="posts" @pagination-change-page="loadPosts"></pagination>  
+                        </div>
+                        <pagination :data="posts" @pagination-change-page="loadPosts"></pagination>
                     </div>
                 </div>
                 <div class="col-lg-4 col-12">
-                    <div class="row">
-                        <h1 class="col-8 lead">Wydarzenia</h1>
-                        <a data-toggle="modal" data-target="#addEvent" style="background-color: #5DADE2;padding: 10px;">Dodaj wydarzenie</a>
+                    <div class="row mx-0">
+                        <div class="col-12">
+                            <div class="row">
+                                <h1 class="col-7 lead mb-0 pl-0">Wydarzenia</h1>
+                                <a class="col-5 btn btn-primary" data-toggle="modal" data-target="#addEvent">Dodaj</a>
+                            </div>
+                        </div>
                         <div v-for="event in events.data" :key="event.id" class="col-12 py-4 my-4">
-                            <div class="card">
+                            <div class="card row  glassy gls-rnd-3">
                                 <div class="card-body">
                                     <h4 class="card-title">{{ event.title }}</h4>
-                                    <p v-html="event.description" class="card-text"></p>
+                                    <!-- <p v-html="event.description" class="card-text"></p> -->
                                     <div class="views">{{ event.date }}</div>
                                 </div>
                                 <div class="col-lg-12 p-2 text-right">
-                                    <router-link :to="{ name: 'event-details', params: { id: event.id, title: event.title }}" class="read-more">Szczegóły</router-link>
-                                </div>    
+                                    <router-link :to="{ name: 'event-details', params: { id: event.id, title: event.title }}" class="read-more gls-btn-black">Szczegóły</router-link>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
     </main-layout>
 </template>
-
-
-
-
 <script>
     import 'quill/dist/quill.core.css'
     import 'quill/dist/quill.snow.css'
@@ -294,7 +285,7 @@
                     console.log(err)
                 });
             },
-            
+
             loadCategory:function(){
                 axios.get('/api/category/' + this.$route.params.id + '/' + this.$route.params.name).then(res=>{
                 if(res.status==200){
@@ -317,7 +308,7 @@
             console.log('teks' + this.date);
                 axios.post('/api/events', {title: this.title_event, description: this.description_event, date: this.date, user_id: this.user_id, category_id: this.$route.params.id})
                 .then((response)=>{
-        
+
                     location.reload();
                     $('#success').css("display", "block");
                     $('#success').html(response.data.message);

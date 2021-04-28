@@ -86,10 +86,6 @@ body {
     font-size: 15px;
     line-height: 24px;
     color: white;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
     @media(max-width: 575px) {
         position: relative;
     }
@@ -113,14 +109,6 @@ body {
             color: white;
             text-decoration: none;
         }
-    }
-}
-
-#content {
-    margin-bottom: 230px;
-
-    @media(max-width: 575px) {
-        margin-bottom: 16px;
     }
 }
 
@@ -148,6 +136,25 @@ body {
 
 .copyright-text {
     margin: 0
+}
+
+.category-box {
+    .category-body {
+        padding: 1.1rem;
+
+        .category-name {
+            font-size: 22px;
+        }
+
+        .category-icon {
+            color: transparent;
+            background: -webkit-linear-gradient(45deg, ivory 55%, transparent);
+            background: linear-gradient(45deg, ivory 55%, transparent);
+            background: -o-linear-gradient(45deg, ivory 55%, transparent);
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+    }
 }
 
 @media (max-width:991px) {
@@ -325,9 +332,7 @@ h6,
     cursor: pointer;
     &:hover {
         text-decoration: none;
-        color: #3B3636;
-        background: #FCFDFD;
-        border: 1px solid #3B3636;
+        color: white;
     }
 }
 

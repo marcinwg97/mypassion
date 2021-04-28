@@ -3,19 +3,15 @@
         <div class="container">
             <div class="row">
                 <div v-for="category in categories" :key="category.id" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <div class="card dropdown">
-                        <div class="card-body" :id="'menu' + category.id" data-toggle="dropdown">
+                    <div class="category-box glassy gls-rnd-3 gls-invert">
+                        <div class="category-body" :id="'menu' + category.id">
                             <div class="text-center">
-                                <i :class="`fas ${category.icon}  fa-5x`" style="color: #5D6D7E;"></i>
+                                <i :class="`fas ${category.icon}  fa-5x category-icon`"></i>
                             </div>
-                            <h5 class="card-title text-center">{{category.name}}</h5>
+                            <div class="text-center mt-4">
+                                <router-link :to="{ name: 'category-details', params: { id: category.id, name: category.name }}" class="category-name">{{category.name}}</router-link>
+                            </div>
                         </div>
-
-                        <ul class="dropdown-menu" role="menu" :aria-labelledby="'menu' + category.id" style="width: 100%; text-align: center;">
-                            <li v-for="children in category.children" :key="children.id">
-                                <router-link :to="{ name: 'category-details', params: { id: children.id, name: children.name }}" style="color: black !important">{{children.name}}</router-link>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
