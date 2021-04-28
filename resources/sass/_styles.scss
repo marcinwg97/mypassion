@@ -1,12 +1,9 @@
 body {
     font-family: 'Fjalla One', sans-serif;
     font-family: 'Roboto', sans-serif;
-}
-
-footer {
-    right: 0;
-    bottom: 0;
-    left: 0;
+    background-image: url(https://images.hdqwalls.com/download/triangles-colorful-background-nz-1920x1080.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .sidebar-container {
@@ -89,6 +86,13 @@ footer {
     font-size: 15px;
     line-height: 24px;
     color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @media(max-width: 575px) {
+        position: relative;
+    }
     hr {
         border-top-color: white;
         opacity: 0.5;
@@ -109,6 +113,14 @@ footer {
             color: white;
             text-decoration: none;
         }
+    }
+}
+
+#content {
+    margin-bottom: 230px;
+
+    @media(max-width: 575px) {
+        margin-bottom: 16px;
     }
 }
 
@@ -163,13 +175,13 @@ footer {
 .navbar-nav {
     .nav-link {
         color: #5DADE2;
-        text-transform: uppercase; 
+        text-transform: uppercase;
         font-size: 20px;
         a {
             color: inherit;
             &:hover {
                 color: #5DADE2;
-                text-transform: uppercase; 
+                text-transform: uppercase;
                 font-size: 20px;
             }
         }
