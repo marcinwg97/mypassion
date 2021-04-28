@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div v-for="category in categories" :key="category.id" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <div class="category-box glassy gls-rnd-3 gls-invert">
+                    <div class="category-box glassy gls-rnd-3 gls-invert gls-hov">
                         <div class="category-body" :id="'menu' + category.id">
                             <div class="text-center">
                                 <i :class="`fas ${category.icon}  fa-5x category-icon`"></i>
@@ -16,7 +16,9 @@
                 </div>
             </div>
             <div class="row mx-0">
-                <h1 class="text-center">Najnowsze posty</h1>
+                <div class="col-12 glassy gls-rnd-3 justify-content-center">
+                    <h1 class="text-center mb-0 py-1">Najnowsze posty</h1>
+                </div>
                 <div class="post-detail col-12 py-4 my-4" v-for="post in posts.data" :key="post.id">
                     <div class="col-lg-2">
                         <h2 class="publish-day">{{(post.date).substring(8,10)}}</h2>
