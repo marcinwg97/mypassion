@@ -32,7 +32,7 @@
         </ul>
     </aside>
     <div class="col-12 col-lg-10 offset-0 offset-lg-2 px-0">
-        <main id="admin" class="py-4">
+        <main id="content" class="pt-4">
             <slot></slot>
         </main>
         <footer class="site-footer">
@@ -70,7 +70,7 @@
 </div>
 </template>
 <style lang="scss" scoped>
-    #admin {
+    #content {
         min-height: 100vh;
     }
     footer {
@@ -83,7 +83,7 @@
         .sidebar-container {
             position: relative;
         }
-        #admin {
+        #content {
             min-height: unset;
         }
     }

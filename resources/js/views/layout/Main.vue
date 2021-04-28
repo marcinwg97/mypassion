@@ -1,5 +1,5 @@
 <template>
-<div style="position: relative; min-height: 100vh">
+<div style="position: relative; min-height: 100vh; flex-direction: column; display: flex">
     <div class="container cont-mobile">
         <nav class="navbar navbar-expand-md" style="background-color: white;">
             <router-link :to="{name: 'home'}" class="navbar-brand">
@@ -43,10 +43,10 @@
             </div>
         </nav>
     </div>
-    <main id="content" class="pt-3 py-lg-5">
+    <main id="content" class="pt-3">
         <slot></slot>
     </main>
-    <footer class="site-footer">
+    <footer class="site-footer mt-auto">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6">
