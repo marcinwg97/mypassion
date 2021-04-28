@@ -62,7 +62,7 @@ Route::middleware('auth:api')->group(function () {
     //PostFavorite and UserFavorite
     Route::get('user/post-favorite', 'Api\User\PostController@getPostsFavorite');
     Route::get('user/user-favorite', 'Api\User\UserController@getUsersFavorite');
-    
+
     //EventMember
     Route::get('user/event-member', 'Api\User\EventController@getEventWhereMember');
     Route::post('user/event-member/delete/{id}', 'Api\User\EventController@deleteEventWhereMember');
@@ -83,10 +83,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('user', 'Api\User\UserController@index');
     Route::post('user/avatar', 'Api\User\UserController@updateAvatar');
     Route::post('user', 'Api\User\UserController@update');
-           
-    //Events   
 
-    
+    //Events
+
+
 });
 
 //MainPage
@@ -104,13 +104,14 @@ Route::get('category/{id}', 'Api\CategoryController@details');
 Route::get('category/{id}/{name}', 'Api\CategoryController@details');
 Route::post('comment/store', 'Api\CommentController@store')->middleware('auth:api');
 
-//Events 
+//Events
 Route::get('events/category/{id}', 'Api\EventController@index');
 Route::get('event', 'Api\EventController@details');
 Route::post('event-add-user', 'Api\EventController@addUserToEvent')->middleware('auth:api');
 Route::get('event/user/{id}', 'Api\EventController@VerifyUserInEvent')->middleware('auth:api');
 Route::post('event-remove-user', 'Api\EventController@removeUserFromEvent')->middleware('auth:api');
 Route::post('events', 'Api\EventController@addEvent')->middleware('auth:api');
+Route::get('events', 'Api\EventController@events');
 
 //FavoritePost
 
@@ -123,7 +124,7 @@ Route::post('favorite-remove-post', 'Api\PostController@removePostFromFavorite')
 Route::post('favorite-add-user', 'Api\UserController@addUserToFavorite')->middleware('auth:api');
 Route::get('favorite/user/{id}', 'Api\UserController@VerifyUserFavorite')->middleware('auth:api');
 Route::post('favorite-remove-user', 'Api\UserController@removeUserFromFavorite')->middleware('auth:api');
-    
+
 
 //Messages
 Route::post('messages', 'Api\FormContactController@store');

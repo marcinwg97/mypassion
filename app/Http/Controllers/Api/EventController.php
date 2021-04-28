@@ -13,8 +13,13 @@ use Auth;
 class EventController extends Controller
 {
     public function index($id) {
-        return response()->json(Event::where('category_id', $id)->with(['category', 'user'])->paginate(5)->toArray());
+        return response()->json(Event::where('category_id', $id)->with(['category', 'user'])->paginate(10)->toArray());
     }
+
+    public function events() {
+        return response()->json(Event::with(['category', 'user'])->paginate(10)->toArray());
+    }
+
     public function details(Request $request) {
         return response()->json(Event::where('id', $request->id)->where('title', $request->title)->first()->toArray());
     }
@@ -36,7 +41,7 @@ class EventController extends Controller
         $event = new Event;
         $event->title = $request->title;
         $event->description = $request->description;
-        $event->date = $request->date; 
+        $event->date = $request->date;
         $event->user_id = Auth::user()->id;
         $event->category_id = $request->category_id;
         $event->save();
@@ -49,14 +54,14 @@ class EventController extends Controller
     public function VerifyUserInEvent($id) {
         $event_user = EventMember::where('event_id', $id)->where('user_id', Auth::user()->id)->first();
         if($event_user) {
-            return 1; 
+            return 1;
         }
     }
 
     public function removeUserFromEvent(Request $request) {
         $event_user = EventMember::where('event_id', $request->event_id)->where('user_id', Auth::user()->id)->first();
-        $event_user->delete(); 
+        $event_user->delete();
 
-        return 1; 
+        return 1;
     }
 }

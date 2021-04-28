@@ -37,6 +37,7 @@ import UserPostEdit from './views/user/post/PostEdit'
 import UserEvent from './views/user/event/Event'
 import UserEventEdit from './views/user/event/EventEdit'
 import EventMember from './views/user/EventMember'
+import EventList from '@views/event/EventList'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -226,6 +227,11 @@ const router = new VueRouter({
             path: '/user/:id',
             name: 'user-profile',
             component: UserProfile
+        },
+        {
+            path: '/events',
+            name: 'events',
+            component: EventList
         },
     ],
 });

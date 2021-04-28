@@ -1,10 +1,9 @@
 <template>
 <div style="position: relative; min-height: 100vh">
     <div class="container cont-mobile">
-
         <nav class="navbar navbar-expand-md" style="background-color: white;">
             <router-link :to="{name: 'home'}" class="navbar-brand">
-                <img src="/img/logo.png" alt="">
+                <img class="img-fluid" src="/img/logo.png" alt="">
             </router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,7 +20,7 @@
                         <form @submit.prevent="redirectSearch">
                             <div class="row no-gutters align-items-center input-group">
                                 <div class="col-12">
-                                      v-on:input wywołuje pobieranie hintów przy każdej zmianie wartości search 
+                                      v-on:input wywołuje pobieranie hintów przy każdej zmianie wartości search
                                     <input class="form-control border-secondary rounded-pill pr-5" type="text" v-on:focusout="hide" v-on:input="loadHints" placeholder="Szukaj..." v-model="search">
                                 </div>
                                 <div class="col-auto" style="left: 6px">
@@ -33,15 +32,18 @@
                         </form>
                         <search-help v-if="isHintVisible" :hints="searchResults"></search-help>
                     </div> -->
+                    <!-- Niezalogowany -->
                     <router-link :to="{ name: 'login' }" class="nav-link" v-if="!isLoggedIn">Logowanie</router-link>
                     <router-link :to="{ name: 'register' }" class="nav-link" v-if="!isLoggedIn">Rejestracja</router-link>
+                    <!-- Zalogowany -->
+                    <router-link :to="{ name: 'events' }" class="nav-link" v-if="isLoggedIn">Wydarzenia</router-link>
                     <router-link :to="{ name: 'user-data' }" class="nav-link" v-if="isLoggedIn">Panel</router-link>
                     <a v-on:click="logout" class="nav-link" v-if="isLoggedIn" style="cursor: pointer">Wyloguj</a>
                 </div>
             </div>
         </nav>
     </div>
-    <main class="py-3 py-lg-5">
+    <main id="content" class="pt-3 py-lg-5">
         <slot></slot>
     </main>
     <footer class="site-footer">
