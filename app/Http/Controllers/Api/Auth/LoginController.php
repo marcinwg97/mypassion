@@ -20,6 +20,6 @@ class LoginController extends Controller
             return response()->json(['success' => $success]);
         }
 
-        return response()->json(['error' => 'Unauthorised'], 401);
+        return response()->json(['error' => 'Błąd logowania'], 422);
     }
 }

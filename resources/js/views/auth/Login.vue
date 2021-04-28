@@ -20,8 +20,12 @@
                 <a style="color: black !important;" href="/register">Jeśli nie masz konta, zarejestruj się!</a>
             </form>
         </div>
+        <!-- Alert jeśli wystąpi błąd -->
+        <div v-if="error_message" class="alert alert-danger" role="alert" style="position: fixed; top: 1rem;">
+            {{ error_message }}
+        </div>
     </div>
-</template> 
+</template>
 <style lang="scss" scoped>
     @media(min-width: 992px) {
         .auth-form {
@@ -49,7 +53,8 @@
         data(){
             return {
                 email : "",
-                password : ""
+                password : "",
+                error_message: null
             }
         },
         props: {
@@ -73,10 +78,26 @@
                         if (localStorage.getItem('jwt') != null){
                             this.$router.go('home')
                         }
-                    }).catch(function (error) {
-                        console.error(error);
+                    }).catch(error => {
+                        switch (error.response.status) {
+                        case 422:                                       //Złe dane logowania
+                            this.showError('Błędne dane logowania');
+                            break;
+                        default:                                        //Pozostałe błędy
+                            console.error(error);
+                            break;
+                        }
                     });
                 }
+            },
+            showError: function(message_value) {
+                this.error_message = message_value;                     //Przekazanie wartości errora do property
+                setTimeout(() => {                                      //Po 3000ms wywołuje funkcje chowającą alert
+                    this.hideError();
+                }, 3000);
+            },
+            hideError: function() {
+                this.error_message = null;
             }
         },
         beforeRouteEnter (to, from, next) {
