@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class LogoutController extends Controller
 {
     public function logout()
     {

@@ -23,6 +23,9 @@
             <li>
             <sidebar-link :href="'user-event-member'" :active="$route.name == 'user-event-member'">Wydarzenia, w których chcesz wziąć udział</sidebar-link>
             </li>
+             <li>
+            <sidebar-link :href="'chat'" :active="$route.name == 'chat'">Czat</sidebar-link>
+            </li>
             <li>
                 <router-link :to="{ name: 'home' }">Powrót na stronę</router-link>
             </li>

@@ -38,6 +38,7 @@ import UserEvent from './views/user/event/Event'
 import UserEventEdit from './views/user/event/EventEdit'
 import EventMember from './views/user/EventMember'
 import EventList from '@views/event/EventList'
+import ChatComponent from './views/chat/ChatComponent'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -232,6 +233,22 @@ const router = new VueRouter({
             path: '/events',
             name: 'events',
             component: EventList
+        },
+
+        {
+            path: '/chat',
+            name: 'chat',
+            component: ChatComponent
+        },
+
+        {
+            path: 'messages',
+            name: 'messages'
+        },
+
+        {
+            path: 'send-message',
+            name: 'send-message'
         },
     ],
 });
