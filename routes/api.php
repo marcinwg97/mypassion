@@ -142,3 +142,8 @@ Route::get('about-us', 'Api\StaticSiteController@aboutUs');
 //Search
 Route::get('search', 'Api\PostController@search');
 Route::get('search-hints', 'Api\PostController@searchDynamic');
+
+//Chat
+Route::post('/chat', 'Api\ChatController@index')->middleware('auth:api');
+Route::post('messages', 'Api\ChatController@messages')->middleware('auth:api');
+Route::post('send-message', 'Api\ChatController@send_message')->middleware('auth:api');
