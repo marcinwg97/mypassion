@@ -143,7 +143,14 @@ Route::get('about-us', 'Api\StaticSiteController@aboutUs');
 Route::get('search', 'Api\PostController@search');
 Route::get('search-hints', 'Api\PostController@searchDynamic');
 
-//Chat
+//Chat ogólny
 Route::post('/chat', 'Api\ChatController@index')->middleware('auth:api');
 Route::post('messages', 'Api\ChatController@messages')->middleware('auth:api');
 Route::post('send-message', 'Api\ChatController@send_message')->middleware('auth:api');
+
+//Czat one-to-one
+Route::post('/chat-one-to-one', 'Api\ChatOneToOneController@index')->middleware('auth:api');
+Route::post('/chat-one-to-one-send', 'Api\ChatOneToOneController@send_message')->middleware('auth:api');
+Route::post('/chat-one-to-one-messages'.'/{from_user}', 'Api\ChatOneToOneController@show_messages')->middleware('auth:api');
+Route::post('/chat-one-to-one-messages-sent/{to_user}','Api\ChatOneToOneController@show_sent_messages')->middleware('auth:api');
+
