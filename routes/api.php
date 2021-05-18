@@ -154,3 +154,7 @@ Route::post('/chat-one-to-one-send', 'Api\ChatOneToOneController@send_message')-
 Route::post('/chat-one-to-one-messages'.'/{from_user}', 'Api\ChatOneToOneController@show_messages')->middleware('auth:api');
 Route::post('/chat-one-to-one-messages-sent/{to_user}','Api\ChatOneToOneController@show_sent_messages')->middleware('auth:api');
 
+
+Route::post('/chat-one-to-one-count-messages', 'Api\ChatOneToOneController@count_messages');
+Route::post('/chat-one-to-one-unread-messages'.'/{to_user}', 'Api\ChatOneToOneController@unread_messages');
+

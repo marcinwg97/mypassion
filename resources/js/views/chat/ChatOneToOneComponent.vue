@@ -9,23 +9,33 @@
                    
                     <ul class="list-group">
                            <li class="list-group-item"
-                           @click.prevent="openChat(user), getMessages(user)"
+                           
+                           @click.prevent="openChat(user), getMessages(user), getMessagesSent(user), unreadMessages(user)"
                            :key=user.id
+                           
                            v-for="user in users">
                             <a href="">{{user.name}}</a>
                             
+                            <span v-for="count_message in count_messages" :key="count_message" v-if="user.id===count_message.from_user && count_message.status==1">
+                               <img src="https://pics.freeicons.io/uploads/icons/png/15378291991558965373-512.png" alt="message icon" width="30px">
+                            </span>
                             
                            </li>
                         </ul>
                 </div>
             </div>
             <div class="">
-                 <div v-for="message_from in messages" :key="message_from">
-                    {{message_from.message}} ({{message_from.created_at}})
-                 </div>
+                <div class="row">
+                    <div>
+                        <span class="test"></span>
+                        <div v-for="message_from in messages" :key="message_from">
+                            {{message_from.message}} ({{message_from.created_at}})
+                        </div>
+                    </div>
 
                  <div v-for="sent_message in sent_messages" :key="sent_message">
                     {{sent_message.message}} ({{sent_message.created_at}})
+                 </div>
                  </div>
                  <div>
                 Wyślij wiadomość do: <b class="user_name"></b>
@@ -55,6 +65,11 @@ export default {
             toUser:null,
             messages:[],
             sent_messages:[],
+            count_messages:[],
+            temp:0,
+            a:1,
+            b:0,
+            
            
         };
     },
@@ -62,7 +77,8 @@ export default {
         this.loadUsers();
         this.getMessages();
         this.getMessagesSent();
-
+        this.countMessages();
+        this.unreadMessages();
     },
 
     components: {
@@ -72,6 +88,12 @@ export default {
     filters: {
     },
     methods: {
+        
+        lol: function(a)
+        {
+            let b = parseInt(a);
+            return b;
+        },
 
          loadUsers: function() {
         axios
@@ -118,6 +140,9 @@ export default {
             .then(res => {
             if (res.status == 200) {
                this.messages=res.data;
+               let test_length = this.messages.length;
+               let a = document.querySelector('.test');
+               a.textContent = test_length
             }
             })
             .catch(err => {
@@ -133,13 +158,41 @@ export default {
             .post("/api/chat-one-to-one-messages-sent/"+to_user)
             .then(res => {
             if (res.status == 200) {
-               this.sent_messages=res.data;
+                this.sent_messages=res.data;
             }
             })
             .catch(err => {
             console.log(err);
             });
-        } 
+        },
+
+
+        countMessages: function()
+        {
+             
+
+             axios
+            .post("/api/chat-one-to-one-count-messages")
+            .then(res => {
+            if (res.status == 200) {
+               this.count_messages=res.data;
+            }
+            })
+            .catch(err => {
+            console.log(err);
+            });
+        },
+
+        unreadMessages: function()
+        {
+            let to_user = document.querySelector('.to_user').textContent;
+
+            axios.post('/api/chat-one-to-one-unread-messages/'+to_user, {
+                    to_user: to_user,
+                    
+                    
+                });
+        },
 
         
         

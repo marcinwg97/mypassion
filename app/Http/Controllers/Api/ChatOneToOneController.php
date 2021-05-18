@@ -24,6 +24,7 @@ class ChatOneToOneController extends Controller
         $chat->message=$message;
         $chat->from_user=auth()->id();
         $chat->to_user=$to_user;
+        $chat->status = 1;
 
         $chat->save();
     }
@@ -39,5 +40,17 @@ class ChatOneToOneController extends Controller
     {
         $from_user = $request->from_user;
         return response()->json(Chat::where('from_user', '=', auth()->id())->where('to_user', '=', $from_user)->get()->toArray());
+    }
+
+    public function count_messages()
+    {
+        return response()->json(Chat::where('status', '=', 1)->get()->toArray());
+    }
+
+    public function unread_messages(Request $request)
+    {
+        $to_user = $request->to_user;
+
+        return response()->json(Chat::where('from_user', '=', $to_user)->update(['status'=>0])->get()->toArray());
     }
 }

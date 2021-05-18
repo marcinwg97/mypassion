@@ -272,6 +272,16 @@ const router = new VueRouter({
             path: '/chat-one-to-one-messages-sent/:to_user',
             name: 'show-messages-sent'
         },
+
+        {
+            path: '/chat-one-to-one-count-messages',
+            name: 'chat-one-to-one-count-messages'
+        },
+
+        {
+            path: '/chat-one-to-one-unread-messages/:to_user',
+            name: 'chat-one-to-one-unread-messages'
+        },
     ],
 });
 
