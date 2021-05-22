@@ -2,26 +2,18 @@
   <main-layout>
     
     <div class="container">
-        <div class="row bg-white">
+        <div class="row bg-purple-700">
             <div class="col-4">
                 <div class="p-2">
                     <!-- <a href="">{{user.name}}</a> -->
-                   
                     <ul class="list-group">
-                           <li class="list-group-item"
-                           
-                           @click.prevent="openChat(user), getMessages(user), getMessagesSent(user), unreadMessages(user)"
-                           :key=user.id
-                           
-                           v-for="user in users">
+                        <li class="list-group-item" @click.prevent="openChat(user), getMessages(user), getMessagesSent(user), unreadMessages(user)" :key=user.id v-for="user in users">
                             <a href="">{{user.name}}</a>
-                            
                             <span v-for="count_message in count_messages" :key="count_message" v-if="user.id===count_message.from_user && count_message.status==1">
                                <img src="https://pics.freeicons.io/uploads/icons/png/15378291991558965373-512.png" alt="message icon" width="30px">
                             </span>
-                            
-                           </li>
-                        </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="">
@@ -55,13 +47,11 @@
 <script>
 import MainLayout from "@views/layout/Main";
 
-
-
 export default {
     data() {
         return {
             users: [],
-           message: null,
+            message: null,
             toUser:null,
             messages:[],
             sent_messages:[],
@@ -69,8 +59,6 @@ export default {
             temp:0,
             a:1,
             b:0,
-            
-           
         };
     },
     mounted() {
@@ -80,7 +68,6 @@ export default {
         this.countMessages();
         this.unreadMessages();
     },
-
     components: {
         MainLayout,
        
@@ -88,23 +75,21 @@ export default {
     filters: {
     },
     methods: {
-        
         lol: function(a)
         {
             let b = parseInt(a);
             return b;
         },
-
-         loadUsers: function() {
+        loadUsers: function() {
         axios
             .post("/api/chat-one-to-one/")
             .then(res => {
-            if (res.status == 200) {
-               this.users = res.data;
-            }
+                if (res.status == 200) {
+                   this.users = res.data;
+                }
             })
             .catch(err => {
-            console.log(err);
+                console.log(err);
             });
             
         },
@@ -130,73 +115,60 @@ export default {
             this.message = null;
            window.location.reload();
         },
-
         getMessages: function()
         {
             let from_user = document.querySelector('.to_user').textContent;
 
-             axios
+            axios
             .post("/api/chat-one-to-one-messages/"+from_user)
             .then(res => {
-            if (res.status == 200) {
-               this.messages=res.data;
-               let test_length = this.messages.length;
-               let a = document.querySelector('.test');
-               a.textContent = test_length
-            }
+                if (res.status == 200) {
+                    this.messages=res.data;
+                    let test_length = this.messages.length;
+                    let a = document.querySelector('.test');
+                    a.textContent = test_length
+                }
             })
             .catch(err => {
             console.log(err);
             });
         },
-
         getMessagesSent: function()
         {
-             let to_user = document.querySelector('.to_user').textContent;
+            let to_user = document.querySelector('.to_user').textContent;
 
-             axios
+            axios
             .post("/api/chat-one-to-one-messages-sent/"+to_user)
             .then(res => {
-            if (res.status == 200) {
-                this.sent_messages=res.data;
-            }
+                if (res.status == 200) {
+                    this.sent_messages=res.data;
+                }
             })
             .catch(err => {
-            console.log(err);
+                console.log(err);
             });
         },
-
-
         countMessages: function()
         {
-             
-
-             axios
+            axios
             .post("/api/chat-one-to-one-count-messages")
             .then(res => {
-            if (res.status == 200) {
-               this.count_messages=res.data;
-            }
+                if (res.status == 200) {
+                    this.count_messages=res.data;
+                }
             })
             .catch(err => {
-            console.log(err);
+                console.log(err);
             });
         },
-
         unreadMessages: function()
         {
             let to_user = document.querySelector('.to_user').textContent;
 
             axios.post('/api/chat-one-to-one-unread-messages/'+to_user, {
                     to_user: to_user,
-                    
-                    
                 });
         },
-
-        
-        
-        
     }
 };
 </script>
