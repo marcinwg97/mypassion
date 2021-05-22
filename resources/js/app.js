@@ -39,6 +39,7 @@ import UserEventEdit from './views/user/event/EventEdit'
 import EventMember from './views/user/EventMember'
 import EventList from '@views/event/EventList'
 import ChatComponent from './views/chat/ChatComponent'
+import ChatOneToOneComponent from './views/chat/ChatOneToOneComponent'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -249,6 +250,37 @@ const router = new VueRouter({
         {
             path: 'send-message',
             name: 'send-message'
+        },
+
+        {
+            path: '/chat-one-to-one',
+            name: 'chat-one-to-one',
+            component: ChatOneToOneComponent
+        },
+
+        {
+            path: '/chat-one-to-one-send',
+            name: 'chat-one-to-one-send'
+        },
+
+        {
+            path: '/chat-one-to-one-messages/:from_user',
+            name: 'show-messages'
+        },
+
+        {
+            path: '/chat-one-to-one-messages-sent/:to_user',
+            name: 'show-messages-sent'
+        },
+
+        {
+            path: '/chat-one-to-one-count-messages',
+            name: 'chat-one-to-one-count-messages'
+        },
+
+        {
+            path: '/chat-one-to-one-unread-messages/:to_user',
+            name: 'chat-one-to-one-unread-messages'
         },
     ],
 });
