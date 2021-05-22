@@ -243,12 +243,12 @@ const router = new VueRouter({
         },
 
         {
-            path: 'messages',
+            path: '/messages',
             name: 'messages'
         },
 
         {
-            path: 'send-message',
+            path: '/send-message',
             name: 'send-message'
         },
 
