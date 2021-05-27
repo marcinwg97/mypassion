@@ -5,8 +5,9 @@
         <div class="bg-white p-3">
             <div v-for="message in messages" :key="message.id">
                 <label>{{message.title}}</label>
-                <b>{{message.email}}</b> {{message.created_at}}<br />
+                <b>{{message.email}}</b> <br />
                 {{message.contents}}
+               <hr style="border-top: 1px solid green">
             </div>
 
             <br />
@@ -46,10 +47,13 @@ export default {
     methods: {
 
          loadMessages: function() {
-        axios
-            .post("/api/messages/")
+             let token = localStorage.getItem('jwt');
+        axios.post("/api/messages/")
             .then(res => {
+                
+                
             if (res.status == 200) {
+                
                this.messages = res.data;
             }
             })
@@ -60,8 +64,9 @@ export default {
         },
 
         send: function()
-        {
+        {let token = localStorage.getItem('jwt');
             axios.post('/api/send-message', {
+              
                     contents: this.message,
                     
                 });
