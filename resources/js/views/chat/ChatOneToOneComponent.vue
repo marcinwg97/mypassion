@@ -50,9 +50,7 @@ export default {
             messages:[],
             sent_messages:[],
             count_messages:[],
-            temp:0,
-            a:1,
-            b:0,
+            
         };
     },
     mounted() {
