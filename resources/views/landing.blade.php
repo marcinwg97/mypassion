@@ -16,7 +16,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
         <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     </head>
-    <body>
+    <body class="bg-gradient-to-b from-yellow-100 via-yellow-300 to-yellow-500">
         <div id="app">
             <app></app>
         </div>
