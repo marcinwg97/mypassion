@@ -34,20 +34,20 @@
         <slot></slot>
     </main>
     <footer class="site-footer mt-auto bg-red-500">
-        <div class="container mx-auto pb-2">
+        <div class="container mx-auto pb-3">
             <div class="grid grid-cols-1 md:grid-cols-4">
                 <div class="col-span-2">
-                    <h6>My Passion</h6>
+                    <h5 class="text-xl pb-3">My Passion</h5>
                 </div>
                 <div>
-                    <h6>Informacje</h6>
+                    <h5 class="text-xl pb-3">Informacje</h5>
                     <ul class="footer-links">
                         <li><p>ul. Najlepsza</p></li>
                         <li><p>22-333 Wymyślone Miasto</p></li>
                     </ul>
                 </div>
                 <div>
-                    <h6>Kontakt</h6>
+                    <h5 class="text-xl pb-3">Kontakt</h5>
                     <ul class="footer-links">
                         <li><p>Telefon: +48 666 777 888</p></li>
                         <li><p>Email: <a href="mailto:mypassion@mypassion.pl">mypassion@mypassion.pl</a></p></li>

@@ -9,7 +9,7 @@
                                 <i :class="`fas ${category.icon} fa-5x category-icon text-red-400`"></i>
                             </div>
                             <div class="text-center mt-4">
-                                <router-link :to="{ name: 'category-details', params: { id: category.id, name: category.name }}" class="text-lg">{{category.name}}</router-link>
+                                <router-link :to="{ name: 'category-details', params: { id: category.id, name: category.name }}" class="text-lg text-gray-800">{{category.name}}</router-link>
                             </div>
                         </div>
                     </div>
