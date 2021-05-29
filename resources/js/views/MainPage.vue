@@ -1,23 +1,23 @@
 <template>
     <main-layout :title="'Strona główna | MyPassion'" :seo_description="'Strona główna MyPassion'" :seo_keywords="'strona główna, MyPassion'">
-        <div class="container">
-            <div class="row">
-                <div v-for="category in categories" :key="category.id" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <div class="category-box glassy gls-rnd-3 gls-invert gls-hov">
-                        <div class="category-body" :id="'menu' + category.id">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-2 lg:grid-cols-4 lg:gap-4 mb-5">
+                <div v-for="category in categories" :key="category.id">
+                    <div class="category-box glassy gls-rnd-3 gls-invert gls-hov rounded-lg bg-gradient-to-b from-yellow-300 to-yellow-400">
+                        <div class="p-4" :id="'menu' + category.id">
                             <div class="text-center">
-                                <i :class="`fas ${category.icon}  fa-5x category-icon`"></i>
+                                <i :class="`fas ${category.icon} fa-5x category-icon text-red-400`"></i>
                             </div>
                             <div class="text-center mt-4">
-                                <router-link :to="{ name: 'category-details', params: { id: category.id, name: category.name }}" class="category-name">{{category.name}}</router-link>
+                                <router-link :to="{ name: 'category-details', params: { id: category.id, name: category.name }}" class="text-lg">{{category.name}}</router-link>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row mx-0">
-                <div class="col-12 glassy gls-rnd-3 justify-content-center">
-                    <h1 class="text-center mb-0 py-1">Najnowsze posty</h1>
+                <div class="col-12 justify-content-center">
+                    <h1 class="text-center mb-0 py-1 text-2xl">Najnowsze posty</h1>
                 </div>
                 <div class="post-detail col-12 py-4 my-4" v-for="post in posts.data" :key="post.id">
                     <div class="col-lg-2">

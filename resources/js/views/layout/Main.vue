@@ -1,65 +1,52 @@
 <template>
 <div style="position: relative; min-height: 100vh; flex-direction: column; display: flex">
-    <div class="container cont-mobile">
-        <nav class="navbar navbar-expand-md" style="background-color: white;">
-            <router-link :to="{name: 'home'}" class="navbar-brand">
-                <img class="img-fluid" src="/img/logo.png" alt="">
-            </router-link>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-              <!--  <ul class="navbar-nav mr-auto">
-                    <li class="nav-link"><router-link :to="{ name: 'about-us' }">O nas</router-link></li>
-                    <li class="nav-link"><router-link :to="{ name: 'form-contact' }">Kontakt</router-link></li>
-                </ul> -->
-                <!-- Right Side Of Navbar -->
-                <div class="navbar-nav ml-auto">
-                  <!--  <div class="search-box" style="position: relative">
-                        <form @submit.prevent="redirectSearch">
-                            <div class="row no-gutters align-items-center input-group">
-                                <div class="col-12">
-                                      v-on:input wywołuje pobieranie hintów przy każdej zmianie wartości search
-                                    <input class="form-control border-secondary rounded-pill pr-5" type="text" v-on:focusout="hide" v-on:input="loadHints" placeholder="Szukaj..." v-model="search">
-                                </div>
-                                <div class="col-auto" style="left: 6px">
-                                    <button class="btn rounded-pill ml-n5" v-on:click="redirectSearch" style="color: white; background-color: #2574A9" type="button">
-                                    <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                        <search-help v-if="isHintVisible" :hints="searchResults"></search-help>
-                    </div> -->
-                    <!-- Niezalogowany -->
-                    <router-link :to="{ name: 'login' }" class="nav-link" v-if="!isLoggedIn">Logowanie</router-link>
-                    <router-link :to="{ name: 'register' }" class="nav-link" v-if="!isLoggedIn">Rejestracja</router-link>
-                    <!-- Zalogowany -->
-                    <router-link :to="{ name: 'events' }" class="nav-link" v-if="isLoggedIn">Wydarzenia</router-link>
-                    <router-link :to="{ name: 'user-data' }" class="nav-link" v-if="isLoggedIn">Panel</router-link>
-                    <a v-on:click="logout" class="nav-link" v-if="isLoggedIn" style="cursor: pointer">Wyloguj</a>
-                </div>
+    <nav class="bg-yellow-100 shadow" role="navigation">
+        <div class="container mx-auto p-4 flex flex-wrap items-center md:flex-no-wrap">
+            <div class="mr-4 md:mr-8">
+                <router-link :to="{name: 'home'}" class="navbar-brand">
+                    <img class="h-11 w-30" src="/img/logo.png" alt="">
+                </router-link>
             </div>
-        </nav>
-    </div>
-    <main id="content" class="pt-3">
+            <div class="ml-auto md:hidden">
+                <button class="flex items-center px-3 py-2 border rounded" type="button">
+                    <svg class="h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <title>Menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="w-full md:w-auto md:flex-grow md:flex md:items-center">
+                <ul class="flex flex-col mt-4 -mx-4 pt-4 border-t md:flex-row md:items-center md:mx-0 md:ml-auto md:mt-0 md:pt-0 md:border-0">
+                    <li>
+                        <router-link :to="{ name: 'events' }" class="block px-4 py-1 md:p-2 lg:px-4" v-if="isLoggedIn">Wydarzenia</router-link>
+                    </li>
+                    <li>
+                        <router-link :to="{ name: 'user-data' }" class="block px-4 py-1 md:p-2 lg:px-4" v-if="isLoggedIn">Panel</router-link>
+                    </li>
+                    <li>
+                        <a v-on:click="logout" class="block px-4 py-1 md:p-2 lg:px-4" v-if="isLoggedIn" style="cursor: pointer">Wyloguj</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main id="content" class="pt-4">
         <slot></slot>
     </main>
-    <footer class="site-footer mt-auto">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-6">
+    <footer class="site-footer mt-auto bg-red-500">
+        <div class="container mx-auto pb-2">
+            <div class="grid grid-cols-1 md:grid-cols-4">
+                <div class="col-span-2">
                     <h6>My Passion</h6>
                 </div>
-                <div class="col-12 col-md-3">
+                <div>
                     <h6>Informacje</h6>
                     <ul class="footer-links">
                         <li><p>ul. Najlepsza</p></li>
                         <li><p>22-333 Wymyślone Miasto</p></li>
                     </ul>
                 </div>
-                <div class="col-12 col-md-3">
+                <div>
                     <h6>Kontakt</h6>
                     <ul class="footer-links">
                         <li><p>Telefon: +48 666 777 888</p></li>
@@ -67,13 +54,11 @@
                     </ul>
                 </div>
             </div>
-            <hr>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-sm-6 col-12">
-                    <p class="copyright-text">Copyright &copy; 2021</p>
-                </div>
+        <hr>
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1">
+                <p class="copyright-text my-2">Copyright &copy; 2021</p>
             </div>
         </div>
     </footer>
