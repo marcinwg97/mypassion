@@ -15,7 +15,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="">
+            <div>
                 <div class="row">
                     <div>
                         <div v-for="message_from in messages" :key="message_from">
@@ -100,7 +100,7 @@ export default {
                     message: this.message,   
                 });
             this.message = null;
-           window.location.reload();
+            window.location.reload();
         },
         getMessages: function()
         {
@@ -114,7 +114,7 @@ export default {
                 }
             })
             .catch(err => {
-            console.log(err);
+                console.log(err);
             });
         },
         getMessagesSent: function()
