@@ -75,7 +75,7 @@
                             localStorage.setItem('jwt',response.data.success.token)
 
                             if (localStorage.getItem('jwt') != null){
-                                this.$router.go('user-data')
+                                this.$router.go('user/data')
                             }
                           })
                           .catch(error => {
