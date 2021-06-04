@@ -1,6 +1,6 @@
 <template>
-<div class="row mx-0">
-    <aside class="sidebar-container col-12 col-lg-2 px-0">
+<div class="grid grid-cols-6">
+    <aside class="sidebar-container px-0 w-1/6">
         <div class="sidebar-logo">
             MyPassion
         </div>
@@ -37,7 +37,7 @@
             </li>
         </ul>
     </aside>
-    <div class="col-12 col-lg-10 offset-0 offset-lg-2 px-0">
+    <div class="lg:col-start-2 lg:col-span-5 px-3">
         <main id="content" class="pt-4">
             <slot></slot>
         </main>
