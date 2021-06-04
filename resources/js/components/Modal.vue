@@ -1,12 +1,12 @@
 <template>
-    <div v-if="isVisible" class="modal grid grid-cols-1 bg-white w-2/4">
+    <div v-if="isVisible" class="modal grid grid-cols-1 bg-white w-2/4 rounded-lg">
         <!-- Modal header -->
-        <div class="p-3">
-            <h4>{{ header }}</h4>
+        <div class="p-3 border-b-2 border-red-300">
+            <h4 class="text-2xl">{{ header }}</h4>
             <button @click="closeModal()" style="position: absolute;right: 10px;top: 10px;">&times;</button>
         </div>
         <!-- Modal content -->
-        <div class="p-3">
+        <div class="p-3 ">
             <slot></slot>
         </div>
     </div>
