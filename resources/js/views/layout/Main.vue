@@ -15,16 +15,16 @@
                     </svg>
                 </button>
             </div>
-            <div class="w-full md:w-auto md:flex-grow md:flex md:items-center">
+            <div v-if="isLoggedIn" class="w-full md:w-auto md:flex-grow md:flex md:items-center">
                 <ul class="flex flex-col mt-4 -mx-4 pt-4 border-t md:flex-row md:items-center md:mx-0 md:ml-auto md:mt-0 md:pt-0 md:border-0">
                     <li>
-                        <router-link :to="{ name: 'events' }" class="block px-4 py-1 md:p-2 lg:px-4" v-if="isLoggedIn">Wydarzenia</router-link>
+                        <router-link :to="{ name: 'events' }" class="block px-4 py-1 md:p-2 lg:px-4">Wydarzenia</router-link>
                     </li>
                     <li>
-                        <router-link :to="{ name: 'user-data' }" class="block px-4 py-1 md:p-2 lg:px-4" v-if="isLoggedIn">Panel</router-link>
+                        <router-link :to="{ name: 'user-data' }" class="block px-4 py-1 md:p-2 lg:px-4">Konto</router-link>
                     </li>
                     <li>
-                        <a v-on:click="logout" class="block px-4 py-1 md:p-2 lg:px-4" v-if="isLoggedIn" style="cursor: pointer">Wyloguj</a>
+                        <a v-on:click="logout" class="block px-4 py-1 md:p-2 lg:px-4" style="cursor: pointer">Wyloguj</a>
                     </li>
                 </ul>
             </div>
@@ -95,7 +95,7 @@ export default {
         logout: function () {
             localStorage.removeItem('jwt')
             localStorage.removeItem('user')
-            this.$router.go('/')
+            this.$router.push('/login')
         },
         redirectSearch: function() {
             this.$router.push({name: 'search', params: {search: this.search}})

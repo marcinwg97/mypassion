@@ -18,7 +18,7 @@
             <sidebar-link :href="'favorite-post'" :active="$route.name == 'favorite-post'">Ulubione posty</sidebar-link>
             </li>
             <li>
-            <sidebar-link :href="'favorite-user'" :active="$route.name == 'favorite-user'">Ulubioni użytkownicy</sidebar-link>
+            <sidebar-link :href="'favorite-user'" :active="$route.name == 'favorite-user'">Obserwani</sidebar-link>
             </li>
             <li>
             <sidebar-link :href="'user-event-member'" :active="$route.name == 'user-event-member'">Wydarzenia, w których chcesz wziąć udział</sidebar-link>
@@ -27,7 +27,7 @@
             <sidebar-link :href="'chat'" :active="$route.name == 'chat'">Czat ogólny</sidebar-link>
             </li>
             <li>
-            <sidebar-link :href="'chat-one-to-one'" :active="$route.name == 'chat-one-to-one'">Czat one-to-one</sidebar-link>
+            <sidebar-link :href="'chat-one-to-one'" :active="$route.name == 'chat-one-to-one'">Wiadomości</sidebar-link>
             </li>
             <li>
                 <router-link :to="{ name: 'home' }">Powrót na stronę</router-link>
