@@ -62,6 +62,12 @@
                     this.loadPosts();
                 })
             },
+        },
+        beforeRouteEnter (to, from, next) {
+        if ( ! localStorage.getItem('jwt')) {
+            return next('login')
         }
+        next()
+        },
     }
 </script>

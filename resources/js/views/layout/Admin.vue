@@ -99,7 +99,7 @@ export default {
         logout: function () {
             localStorage.removeItem('jwt')
             localStorage.removeItem('user')
-            this.$router.go('/')
+            this.$router.push('/login')
         },
         loadCategories:function(){
             axios.get('/api/categories').then(res=>{

@@ -43,7 +43,7 @@ class UserController extends Controller
         $users = UserFavorite::where('user_id', Auth::user()->id)->get();
         $u = array();
         foreach($users as $user) {
-            $u[] = $user->id;
+            $u[] = $user->favorite_user_id;
         }
         return response()->json(User::whereIn('id', $u)->paginate(5)->toArray());
     }
