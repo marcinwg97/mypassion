@@ -17,7 +17,7 @@
             </div>
             <div class="row mx-0">
                 <div class="col-12 justify-content-center">
-                    <h1 class="text-center mb-0 py-1 text-2xl">Najnowsze posty</h1>
+                    <h1 class="text-center mb-0 py-1 text-2xl">Najnowsze posty obserwowanych</h1>
                 </div>
                 <div class="post-detail col-12 py-4 my-4" v-for="post in posts.data" :key="post.id">
                     <div class="col-lg-2">

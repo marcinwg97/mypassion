@@ -1,6 +1,6 @@
 <template>
     <main-layout :title="'Wydarzenia | MyPassion'" :seo_description="'Wydarzenia w najbliższym czasie MyPassion'" :seo_keywords="'wydarzenia, hobby, MyPassion'">
-        <div class="container">
+        <div class="container mx-auto">
             <!-- <div class="row">
                 <div v-for="category in categories" :key="category.id" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
                     <div class="card dropdown">

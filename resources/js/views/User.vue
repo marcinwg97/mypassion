@@ -1,6 +1,6 @@
 <template>
     <main-layout>
-    <div class="container">
+    <div class="container mx-auto">
         <h1 class="text-center">{{ user.name }}</h1>
         <h1 class="lead">Posty:</h1>
         <div class="post-detail col-12 py-4 my-4" v-for="post in posts" :key="post.id">
@@ -36,9 +36,6 @@
     </div>
     </main-layout>
 </template>
-
-
-
 
 <script>
 import MainLayout from "@views/layout/Main";

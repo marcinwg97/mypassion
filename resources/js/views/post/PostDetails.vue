@@ -3,8 +3,8 @@
     <div v-if="isLoading" class="row mx-0">
       <page-loader></page-loader>
     </div>
-    <div v-else class="container">
-        <div class="row mx-0 py-3 post-detail">
+    <div v-else class="container mx-auto">
+        <div class="row mx-0 p-3 post-detail mb-4">
             <div class="col-12 text-center">
                 <h1 style="color: #2574A9">{{ post.title }}</h1>
             </div>
@@ -30,23 +30,21 @@
         </div>
         
         <div class="col-12" v-if="isAddToFavorite == false">
-            <form class="col-12 col-lg-12" @submit.prevent="addPostToFavorite"><button type="submit" class="btn btn-primary">Dodaj do ulubionych</button></form>
+            <form class="col-12 col-lg-12" @submit.prevent="addPostToFavorite"><button type="submit" class="bg-transparent border border-gray-500 hover:border-indigo-500 text-gray-500 hover:text-indigo-500 font-bold py-1 px-2 rounded-full">Zapisz post do ulubionych</button></form>
         </div>
         <div class="col-12" v-else>
-        <form class="col-12 col-lg-12" @submit.prevent="removePostFromFavorite"><button type="submit" class="btn btn-primary">Usuń z ulubionych</button></form>
+            <form class="col-12 col-lg-12" @submit.prevent="removePostFromFavorite"><button type="submit" class="bg-transparent border border-gray-500 hover:border-indigo-500 text-gray-500 hover:text-indigo-500 font-bold py-1 px-2 rounded-full">Usuń z ulubionych</button></form>
         </div>
-        <h2 class="lead mt-2">Komentarze</h2>
+        <h2 class="my-4 text-2xl">Komentarze</h2>
         <div class="row">
-            <div v-for="comment in comments" :key="comment.id" class="col-12">
+            <div v-for="comment in comments" :key="comment.id" class="my-4 row-span-full bg-yellow-100 rounded-md p-3">
                 <p>{{comment.date}}, {{comment.user.name}}</p>
                 <p>{{comment.contents}}</p>         
             </div>
         </div>
-        <form class="col-12 col-lg-12" @submit.prevent="addComment">
-            <div class="form-group col-12">
-                <div>
-                    <input class="form-control" type="text" name="contents" v-model="contents" required>
-                </div>
+        <form class="row-span-full bg-gray-400" @submit.prevent="addComment">
+            <div class="row-span-full">
+                <input class="form-control" type="text" name="contents" v-model="contents" required>
             </div>
             <button type="submit" class="btn btn-primary">Dodaj komentarz</button>
         </form>
