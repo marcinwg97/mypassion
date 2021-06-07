@@ -6,7 +6,7 @@
                 <div class="jumbotron" v-for="(post, index) in orderedPosts" :key="index">
                     <div class="row">
                         <div class="col-lg-2">
-                            <h2 class="publish-day">{{(post.date).substring(8,10)}}</h2>
+                            <h2 class="publish-day text-3xl">{{(post.date).substring(8,10)}}</h2>
                             <div class="publish-month">{{monthName((post.date).substring(5,7))}} {{(post.date).substring(0,4)}}</div>
                         </div>
                         <div class="col-lg-10">

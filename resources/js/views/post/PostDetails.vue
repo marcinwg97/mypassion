@@ -10,7 +10,7 @@
             </div>
             <div class="col-span-3">
                 <div class="author mb-3">
-                    <p class="post-date"  style="font-style: italic;"><i class="far fa-calendar-alt"></i> {{ post.date.substring(8, 10) }} {{ monthName(post.date.substring(5, 7)) }}, {{ post.date.substring(0, 4) }}</p>
+                    <p class="post-date text-3xl"  style="font-style: italic;"><i class="far fa-calendar-alt"></i> {{ post.date.substring(8, 10) }} {{ monthName(post.date.substring(5, 7)) }}, {{ post.date.substring(0, 4) }}</p>
                     <p class="author-name"><router-link :to="{name: 'user-profile', params: { id: post.user_id}}"><i class="fas fa-pen-nib fa-lg"></i> {{ post.user.name }}</router-link></p>
                 </div>
             </div>

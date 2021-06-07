@@ -24,7 +24,7 @@
                 <div class="post-detail col-12 py-4 my-4 glassy gls-rnd-3" v-for="event in events.data" :key="event.id">
                     <div class="row">
                         <div class="col-lg-2">
-                            <h2 class="publish-day">{{(event.date).substring(8,10)}}</h2>
+                            <h2 class="publish-day text-3xl">{{(event.date).substring(8,10)}}</h2>
                             <div class="publish-month">{{monthName((event.date).substring(5,7))}} {{(event.date).substring(0,4)}}</div>
                         </div>
                         <div class="col-lg-10">

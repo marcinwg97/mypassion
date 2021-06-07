@@ -7,7 +7,7 @@
                     <div class="post-detail rounded-md p-3 my-4" v-for="post in posts" :key="post.id">
                         <div class="grid lg:grid-cols-4">
                             <div>
-                                <h2 class="publish-day">{{(post.date).substring(8,10)}}</h2>
+                                <h2 class="publish-day text-3xl">{{(post.date).substring(8,10)}}</h2>
                                 <div class="publish-month">
                                     <p>{{monthName((post.date).substring(5,7))}} {{(post.date).substring(0,4)}}</p>
                                 </div>

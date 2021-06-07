@@ -11,7 +11,7 @@
             <div class="col-9 col-lg-9">
                 <div class="author mb-3">
                     <span v-if="event.name" class="author-name" style="font-style: italic;"><i class="fas fa-pen-nib"></i> {{ event.name }}</span><br v-if="event.name">
-                    <span class="post-date"  style="font-style: italic;"><i class="far fa-calendar-alt"></i> {{ event.date.substring(8, 10) }} {{ monthName(event.date.substring(5, 7)) }}, {{ event.date.substring(0, 4) }}</span>
+                    <span class="post-date text-3xl"  style="font-style: italic;"><i class="far fa-calendar-alt"></i> {{ event.date.substring(8, 10) }} {{ monthName(event.date.substring(5, 7)) }}, {{ event.date.substring(0, 4) }}</span>
                 </div>
             </div>
             <div class="col-3 col-lg-3 social-buttons pl-0 pr-2 px-lg-3 text-right">
@@ -92,7 +92,7 @@ export default {
             axios.get('/api/event/user/' + this.$route.params.id).then(res=>{
             if(res.status==200){
                 if(res.data == 1) {
-                    this.isAddToEvent = true; 
+                    this.isAddToEvent = true;
                 }
             }
             }).catch(err=>{
