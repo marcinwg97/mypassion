@@ -6,7 +6,7 @@
     <div v-else class="container mx-auto">
         <div class="p-3 post-detail mb-4 row-span-full grid grid-cols-4">
             <div class="text-center col-span-4">
-                <h1 style="color: #2574A9">{{ post.title }}</h1>
+                <h1 style="color: #2574A9" class="text-2xl">{{ post.title }}</h1>
             </div>
             <div class="col-span-3">
                 <div class="author mb-3">
@@ -14,7 +14,7 @@
                     <p class="author-name"><router-link :to="{name: 'user-profile', params: { id: post.user_id}}"><i class="fas fa-pen-nib fa-lg"></i> {{ post.user.name }}</router-link></p>
                 </div>
             </div>
-            <div class="col-3 col-lg-3 social-buttons pl-0 pr-2 px-lg-3 text-right">
+            <div class="social-buttons pl-0 pr-2 px-lg-3 text-right">
                 <span class="badge badge-pill px-0">
                     <a title="Udostępnianie strony na Facebook" class="facebook-share" style="color: white;" href="https://www.facebook.com/sharer/sharer.php?u=https://erpit.pl/post/200-ostatnia-prosta-do-wdrozenia-%E2%80%93-ppk-w-instytucjach-publicznych---webinarium" target="_blank" aria-label="Przycisk udostępniania na Facebook"><i class="fab fa-facebook-f fa-sm"></i></a>
                 </span>

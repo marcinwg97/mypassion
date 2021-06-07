@@ -1,7 +1,7 @@
 <template>
 <div style="position: relative; min-height: 100vh; flex-direction: column; display: flex">
     <nav class="bg-yellow-100 shadow" role="navigation">
-        <div class="container mx-auto p-4 flex flex-wrap items-center md:flex-no-wrap">
+        <div class="container mx-auto py-4 flex flex-wrap items-center md:flex-no-wrap">
             <div class="mr-4 md:mr-8">
                 <router-link :to="{name: 'home'}" class="navbar-brand">
                     <img class="h-11 w-30" src="/img/logo.png" alt="">
@@ -24,7 +24,7 @@
                         <router-link :to="{ name: 'user-data' }" class="block px-4 py-1 md:p-2 lg:px-4">Konto</router-link>
                     </li>
                     <li>
-                        <a v-on:click="logout" class="block px-4 py-1 md:p-2 lg:px-4" style="cursor: pointer">Wyloguj</a>
+                        <a v-on:click="logout" class="block px-4 py-1 md:p-2 lg:px-4 lg:pr-0" style="cursor: pointer">Wyloguj</a>
                     </li>
                 </ul>
             </div>
