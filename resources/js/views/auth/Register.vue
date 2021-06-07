@@ -84,9 +84,8 @@
             },
             beforeRouteEnter (to, from, next) {
                 if (localStorage.getItem('jwt')) {
-                    return next('user-data');
+                    return next('user/data');
                 }
-
                 next();
             }
         }
