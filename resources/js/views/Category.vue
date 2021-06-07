@@ -5,9 +5,9 @@
                 <form class="col-12 col-lg-12" @submit.prevent="addNewPost">
                     <div class="form-group">
                         <div class="form-group">
-                            <label for="title" class="col-form-label">Tytuł:</label>
                             <div>
-                                <input class="form-control" type="text" name="title" v-model="title" required>
+                                <label for="title" class="text-sm">Tytuł:</label>
+                                <input class="rounded-sm px-4 py-3 mt-3 focus:outline-none border border-gray-300 focus:border-red-400 w-full" type="text" name="title" v-model="title" required>
                             </div>
                         </div>
                         <div class="form-group col-12">
@@ -33,15 +33,15 @@
                 <form class="col-12 col-lg-12" @submit.prevent="addNewEvent">
                     <div class="form-group">
                         <div class="form-group">
-                            <label for="title" class="col-form-label">Tytuł:</label>
+                            <label for="title" class="text-sm">Tytuł:</label>
                             <div>
-                                <input class="form-control" type="text" name="title_event" v-model="title_event" required>
+                                <input class="rounded-sm px-4 py-3 mt-3 focus:outline-none border border-gray-300 focus:border-red-400 w-full" type="text" name="title_event" v-model="title_event" required>
                             </div>
                         </div>
                         <div class="form-group col-12">
                             <label for="date" class="col-form-label">Data wydarzenia:</label>
                             <div>
-                                <input type="datetime-local" id="date" name="date" v-model="date" required>
+                                <input type="datetime-local" id="date" name="date" class="rounded-sm px-3 py-2 mt-3 focus:outline-none border border-gray-300" v-model="date" required>
                             </div>
                         </div>
                         <div class="form-group col-12">

@@ -19,28 +19,32 @@
                 <div class="col-12 justify-content-center">
                     <h1 class="text-center mb-0 py-1 text-2xl">Najnowsze posty obserwowanych</h1>
                 </div>
-                <div class="post-detail col-12 py-4 my-4" v-for="post in posts.data" :key="post.id">
-                    <div class="col-lg-2">
-                        <h2 class="publish-day">{{(post.date).substring(8,10)}}</h2>
-                        <div class="publish-month">{{monthName((post.date).substring(5,7))}} {{(post.date).substring(0,4)}}</div>
-                    </div>
-                    <div class="col-lg-10">
-                        <h2 class="post-title">
-                            <router-link :to="{name: 'post-details', params: { id: post.id, title:  post.title}}" class="post-title">{{ post.title }}</router-link>
-                        </h2>
-                        <div class="author mb-3">
-                            <span>
-                                <i class="fas fa-pen-nib fa-lg"></i>
-                                <span class="author-name" v-if="post.name">{{ post.name }}</span>
-                                <span class="author-name" v-else><router-link :to="{name: 'user-profile', params: { id: post.user.id}}">{{ post.user.name }}</router-link></span>
-                            </span>
+                <div class="post-detail rounded-md p-4 my-3 lg:col-span-3" v-for="post in posts.data" :key="post.id">
+                    <div class="grid lg:grid-cols-4">
+                        <div>
+                            <h2 class="publish-day">{{(post.date).substring(8,10)}}</h2>
+                            <div class="publish-month">
+                                <p>{{monthName((post.date).substring(5,7))}} {{(post.date).substring(0,4)}}</p>
+                            </div>
+                            <div class="author mb-3">
+                                <span>
+                                    <i class="fas fa-pen-nib fa-lg"></i>
+                                    <span class="author-name" v-if="post.name">{{ post.name }}</span>
+                                    <span class="author-name" v-else><router-link :to="{name: 'user-profile', params: { id: post.user.id}}">{{ post.user.name }}</router-link></span>
+                                </span>
+                            </div>
                         </div>
-                        <div class="post-description">
-                            <p v-html="post.description_short" class="card-text"></p>
+                        <div class="lg:col-span-3">
+                            <h2 class="post-title">
+                                <router-link :to="{name: 'post-details', params: { id: post.id, title:  post.title}}" class="post-title text-2xl text-gray-800">{{ post.title }}</router-link>
+                            </h2>
+                            <div class="post-description">
+                                <p v-html="post.description_short" class="card-text"></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-12 p-2 text-right">
-                        <router-link :to="{name: 'post-details', params: { id: post.id, title: post.title}}" class="read-more">Czytaj więcej</router-link>
+                        <div class="col-span-4 text-right">
+                            <router-link :to="{name: 'post-details', params: { id: post.id, title: post.title}}" class="read-more">Czytaj więcej</router-link>
+                        </div>
                     </div>
                 </div>
             </div>
