@@ -27,66 +27,66 @@
             </form>
         </div>
     </div>
-    </template>
-    <style lang="scss" scoped>
-        @media(min-width: 992px) {
-            .auth-form {
-                width: 22rem;
+</template>
+<style lang="scss" scoped>
+    @media(min-width: 992px) {
+        .auth-form {
+            width: 22rem;
+        }
+    }
+    .btn-dark-gray {
+        background-color: #252f3f;
+        color: white;
+        font-weight: 500;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    }
+    .text-sm {
+        color: #343a40;
+        font-family: Nunito, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+</style>
+<script>
+    export default {
+        data(){
+            return {
+                name : "",
+                email : "",
+                password : "",
+                password_confirmation : ""
             }
-        }
-        .btn-dark-gray {
-            background-color: #252f3f;
-            color: white;
-            font-weight: 500;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 150ms;
-            transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
-        }
-        .text-sm {
-            color: #343a40;
-            font-family: Nunito, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        }
-    </style>
-    <script>
-        export default {
-            data(){
-                return {
-                    name : "",
-                    email : "",
-                    password : "",
-                    password_confirmation : ""
-                }
-            },
-            methods : {
-                handleSubmit(e) {
-                    e.preventDefault()
+        },
+        methods : {
+            handleSubmit(e) {
+                e.preventDefault()
 
-                        axios.post('api/register', {
-                            name: this.name,
-                            email: this.email,
-                            password: this.password,
-                          })
-                          .then(response => {
-                            localStorage.setItem('user',response.data.success.name)
-                            localStorage.setItem('jwt',response.data.success.token)
+                    axios.post('api/register', {
+                        name: this.name,
+                        email: this.email,
+                        password: this.password,
+                        })
+                        .then(response => {
+                        localStorage.setItem('user',response.data.success.name)
+                        localStorage.setItem('jwt',response.data.success.token)
 
-                            if (localStorage.getItem('jwt') != null){
-                                this.$router.go('user/data')
-                            }
-                          })
-                          .catch(error => {
-                            console.error(error);
-                          });
-                }
-            },
-            beforeRouteEnter (to, from, next) {
-                if (localStorage.getItem('jwt')) {
-                    return next('user/data');
-                }
-                next();
+                        if (localStorage.getItem('jwt') != null){
+                            this.$router.go('user/data')
+                        }
+                        })
+                        .catch(error => {
+                        console.error(error);
+                        });
             }
+        },
+        beforeRouteEnter (to, from, next) {
+            if (localStorage.getItem('jwt')) {
+                return next('user/data');
+            }
+            next();
         }
-    </script>
+    }
+</script>
