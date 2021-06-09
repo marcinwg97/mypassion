@@ -29,7 +29,7 @@
                         <label for="description" class="col-form-label">Biografia:</label>
                         <div>
                             <quill-editor v-model="user.description"
-                                class="mb-3"
+                                class="mb-3 bg-white"
                                 id="rich-text"
                                 rows="20"
                                 :options="editorOption"
@@ -110,7 +110,7 @@
     import 'quill/dist/quill.bubble.css'
     import { quillEditor, Quill } from 'vue-quill-editor'
     import ImageResize from 'quill-image-resize';
-     import UserLayout from '@views/layout/User'
+    import UserLayout from '@views/layout/User'
 
     // Register ImageResize module
     Quill.register('modules/imageResize', ImageResize);
@@ -170,7 +170,8 @@
                             },
                             modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
                         }
-                    }
+                    },
+                    placeholder: 'Wpisz treść...'
                 },
             }
         },
