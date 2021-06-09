@@ -1,5 +1,5 @@
 <template>
-  <main-layout>
+  <user-layout>
     <div class="container">
         <div class="bg-white p-3">
             <div v-for="message in messages" :key="message.id">
@@ -15,11 +15,11 @@
                 </form>
             </div>
         </div>
-    </div>    
-  </main-layout>
+    </div>
+  </user-layout>
 </template>
 <script>
-import MainLayout from "@views/layout/Main";
+import UserLayout from "@views/layout/User";
 
 export default {
     data() {
@@ -32,14 +32,14 @@ export default {
         this.loadMessages();
     },
     components: {
-        MainLayout,
+        UserLayout,
     },
     filters: {
     },
     methods: {
          loadMessages: function() {
              let token = localStorage.getItem('jwt');
-             
+
             axios
             .post("/api/messages/")
             .then(res => {

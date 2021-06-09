@@ -1,5 +1,5 @@
 <template>
-  <main-layout>
+  <user-layout>
     <div class="container">
         <div class="row bg-purple-200" style="padding-bottom: 20px;padding-top:20px;margin-left:0px;margin-right:0px">
             <div class="col-4">
@@ -19,11 +19,11 @@
                 <div class="row">
                     <div>
                         <div v-for="message_from in messages" :key="message_from">
-                            {{message_from.message}} 
+                            {{message_from.message}}
                         </div>
                     </div>
                     <div v-for="sent_message in sent_messages" :key="sent_message">
-                        {{sent_message.message}} 
+                        {{sent_message.message}}
                     </div>
                 </div>
                 <div>
@@ -35,11 +35,11 @@
                 </div>
             </div>
         </div>
-    </div>    
-  </main-layout>
+    </div>
+  </user-layout>
 </template>
 <script>
-import MainLayout from "@views/layout/Main";
+import UserLayout from "@views/layout/User";
 
 export default {
     data() {
@@ -50,7 +50,7 @@ export default {
             messages:[],
             sent_messages:[],
             count_messages:[],
-            
+
         };
     },
     mounted() {
@@ -61,7 +61,7 @@ export default {
         this.unreadMessages();
     },
     components: {
-        MainLayout,
+        UserLayout,
     },
     filters: {
     },
@@ -97,7 +97,7 @@ export default {
             let to_user = document.querySelector('.to_user').textContent;
             axios.post('/api/chat-one-to-one-send', {
                     to_user: to_user,
-                    message: this.message,   
+                    message: this.message,
                 });
             this.message = null;
             window.location.reload();
