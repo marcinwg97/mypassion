@@ -1,13 +1,12 @@
 <template>
     <user-layout>
         <div class="card-body table-responsive p-0">
-            <table class="table">
+            <table class="table w-full">
                 <thead class="thead-light">
                     <tr>
-                        <th>Tytuł</th>
+                        <th class="text-left">Tytuł</th>
                         <th>Data</th>
                         <th>Kategoria</th>
-                        <th>Opis</th>
                         <th>Miejsce wydarzenia</th>
                         <th>Edytuj</th>
                         <th>Usuń</th>
@@ -16,12 +15,21 @@
                 <tbody>
                     <tr v-for="event in events.data" :key="event.id">
                         <td>{{ event.title }}</td>
-                        <td>{{ event.date }}</td>
-                        <td>{{ event.category.name }}</td>
-                        <td>{{ event.description }}</td>
-                        <td>{{ event.place }}</td>
-                        <td><button class="btn btn-warning"><router-link style="color: white !important;" :to="{ name: 'user-events-edit', params: { id: event.id }}">Edytuj</router-link></button></td>
-                        <td><form @submit.prevent="deleteEvent(event.id)"><button type="submit" class="btn btn-danger">Usuń</button></form></td>
+                        <td class="text-center">{{ event.date }}</td>
+                        <td class="text-center">{{ event.category.name }}</td>
+                        <td class="text-center">{{ event.place }}</td>
+                        <td class="justify-center flex">
+                            <button class="bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded-full text-gray-100">
+                                <router-link :to="{ name: 'user-events-edit', params: { id: event.id }}">Edytuj</router-link>
+                            </button>
+                        </td>
+                        <td>
+                            <form @submit.prevent="deleteEvent(event.id)" class="justify-center flex">
+                                <button type="submit" class="bg-red-500 hover:bg-red-600 px-2 py-1 rounded-full text-gray-100 w-full">
+                                    <i class="far fa-trash-alt"></i> Usuń
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     <pagination :data="events" @pagination-change-page="loadEvents"></pagination>
                 </tbody>

@@ -1,10 +1,10 @@
 <template>
     <user-layout>
         <div class="card-body table-responsive p-0">
-            <table class="table">
+            <table class="table w-full">
                 <thead class="thead-light">
                     <tr>
-                        <th>Tytuł</th>
+                        <th class="text-left">Tytuł</th>
                         <th>Data</th>
                         <th>Kategoria</th>
                         <th>Edytuj</th>
@@ -14,10 +14,20 @@
                 <tbody>
                     <tr v-for="post in posts.data" :key="post.id">
                         <td>{{ post.title }}</td>
-                        <td>{{ post.date }}</td>
-                        <td>{{ post.category.name }}</td>
-                        <td><button class="btn btn-warning"><router-link style="color: white !important;" :to="{ name: 'user-posts-edit', params: { id: post.id }}">Edytuj</router-link></button></td>
-                        <td><form @submit.prevent="deletePost(post.id)"><button type="submit" class="btn btn-danger">Usuń</button></form></td>
+                        <td class="text-center">{{ post.date }}</td>
+                        <td class="text-center">{{ post.category.name }}</td>
+                        <td class="justify-center flex">
+                            <button class="bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded-full text-gray-100">
+                                <router-link :to="{ name: 'user-posts-edit', params: { id: post.id }}">Edytuj</router-link>
+                            </button>
+                        </td>
+                        <td>
+                            <form @submit.prevent="deletePost(post.id)" class="justify-center flex">
+                                <button type="submit" class="bg-red-500 hover:bg-red-600 px-2 py-1 rounded-full text-gray-100 w-full">
+                                    <i class="far fa-trash-alt"></i> Usuń
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     <pagination :data="posts" @pagination-change-page="loadPosts"></pagination>
                 </tbody>
