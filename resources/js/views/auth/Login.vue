@@ -1,19 +1,18 @@
 <template>
-    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh; background-color: #f4f5f7; flex-direction: column;">
-        <div class="auth-form p-3 bg-white shadow-sm">
-            <img src="/img/logo.png" alt="" style="height: 80%;
-    width: 80%;">
+    <div class="justify-center flex" style="min-height: 100vh; background-color: #f4f5f7;">
+        <div class="h-1/2 w-1/4 p-3 bg-white shadow-sm self-center">
+            <img src="/img/logo.png" alt="" style="height: 80%; width: 80%;">
             <form method="POST" action="/login">
-                <div class="form-group">
+                <div class="my-5 text-sm">
                     <label for="email" class="text-sm">Adres e-mail</label>
-                    <input id="email" type="email" class="form-control" v-model="email" required autofocus>
+                    <input id="email" placeholder="Adres email" type="email" class="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" v-model="email" required autofocus>
                 </div>
-                <div class="form-group">
+                <div class="my-5 text-sm">
                     <label for="password" class="text-sm">Hasło</label>
-                    <input id="password" type="password" class="form-control" v-model="password" required>
+                    <input id="password" placeholder="Podaj hasło" type="password" class="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" v-model="password" required>
                 </div>
-                <div class="form-group mb-0 text-right">
-                    <button type="submit" class="btn btn-dark-gray" @click="handleSubmit">
+                <div class="my-5 text-sm">
+                    <button type="submit" class="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full" @click="handleSubmit">
                         Zaloguj
                     </button>
                 </div>
@@ -27,11 +26,6 @@
     </div>
 </template>
 <style lang="scss" scoped>
-    @media(min-width: 992px) {
-        .auth-form {
-            width: 22rem;
-        }
-    }
     .btn-dark-gray {
         background-color: #252f3f;
         color: white;

@@ -1,23 +1,23 @@
 <template>
     <user-layout>
         <div class="card-body table-responsive p-0">
-            <table class="table">
+            <table class="table w-full">
                 <thead class="thead-light">
                     <tr>
-                        <th>Tytuł</th>
+                        <th class="text-left">Tytuł</th>
                         <th>Data</th>
                         <th>Opis</th>
-                        <th>Twórca</th>
+                        <th>Organizator</th>
                         <th>Usuń</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="event in events.data" :key="event.id">
                         <td>{{ event.title }}</td>
-                        <td>{{ event.date }}</td>
-                        <td>{{ event.description }}</td>
-                        <td>{{ event.user.email }}</td>
-                        <td><form @submit.prevent="deleteEvent(event.id)"><button type="submit" class="btn btn-danger">Usuń</button></form></td>
+                        <td class="text-center">{{ event.date }}</td>
+                        <td class="text-center">{{ event.description }}</td>
+                        <td class="text-center">{{ event.user.email }}</td>
+                        <td><form @submit.prevent="deleteEvent(event.id)" class="justify-center flex"><button type="submit" class="bg-red-500 hover:bg-red-600 px-2 py-1 rounded-full text-gray-100 w-full"><i class="far fa-trash-alt"></i> Usuń</button></form></td>
                     </tr>
                     <pagination :data="events" @pagination-change-page="loadEvents"></pagination>
                 </tbody>
@@ -26,7 +26,7 @@
     </user-layout>
 </template>
 <style scoped>
-    
+
 </style>
 <script>
     import UserLayout from '@views/layout/User'

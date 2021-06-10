@@ -16,6 +16,7 @@ class PostController extends Controller
     public function index($id) {
         return response()->json(Post::where('category_id', $id)->with(['category', 'user'])->orderBy('id', 'desc')->paginate(5)->toArray());
     }
+
     public function getPostOnMainPage() {
         $users = UserFavorite::where('user_id', Auth::user()->id)->get();
         $u = array();
@@ -24,9 +25,11 @@ class PostController extends Controller
         }
         return response()->json(Post::whereIn('user_id', $u)->with(['category', 'user'])->orderBy('id', 'desc')->paginate(5)->toArray());
     }
+
     public function details(Request $request) {
-        return response()->json(Post::where('id', $request->id)->where('title', $request->title)->first()->toArray());
+        return response()->json(Post::where('id', $request->id)->where('title', $request->title)->with(['category', 'user'])->first()->toArray());
     }
+
     public function addPostToFavorite(Request $request) {
 
         $post_favorite = new PostFavorite;
@@ -42,14 +45,14 @@ class PostController extends Controller
     public function VerifyPostFavorite($id) {
         $post_favorite = PostFavorite::where('post_id', $id)->where('user_id', Auth::user()->id)->first();
         if($post_favorite) {
-            return 1; 
+            return 1;
         }
     }
 
     public function removePostFromFavorite(Request $request) {
         $post_favorite = PostFavorite::where('post_id', $request->post_id)->where('user_id', Auth::user()->id)->first();
-        $post_favorite->delete(); 
+        $post_favorite->delete();
 
-        return 1; 
+        return 1;
     }
 }

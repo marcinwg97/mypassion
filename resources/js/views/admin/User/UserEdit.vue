@@ -23,7 +23,7 @@
                         <input class="form-control" type="password" name="password" v-model="user.password" required>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Zapisz</button>
+                <button type="submit" class="bg-transparent border border-gray-500 hover:border-indigo-500 text-gray-500 hover:text-indigo-500 font-bold py-1 px-2 rounded-full">Zapisz</button>
             </div>
         </form>
     </div>

@@ -16,7 +16,7 @@ class EventController extends Controller
         foreach($users as $user) {
             $u[] = $user->event_id;
         }
-        return response()->json(Event::with(['category', 'user'])->whereIn('id', $e)->paginate(5)->toArray());
+        return response()->json(Event::with(['category', 'user'])->whereIn('id', $u)->paginate(5)->toArray());
     }
 
     public function deleteEventWhereMember($id) {

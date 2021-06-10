@@ -1,79 +1,77 @@
 <template>
-<div class="row mx-0">
-    <aside class="sidebar-container col-12 col-lg-2 px-0">
-        <div class="sidebar-logo">
-            MyPassion
+    <div class="grid grid-cols-1 lg:grid-cols-6">
+        <aside class="sidebar-container px-0 lg:w-1/6 w-full">
+            <div class="sidebar-logo">
+                MyPassion
+            </div>
+            <ul class="sidebar-navigation">
+                <li>
+                    <sidebar-link :href="'user-data'" :active="$route.name == 'user-data'">Dane użytkownika</sidebar-link>
+                </li>
+                <li>
+                    <sidebar-link :href="'user-posts'" :active="$route.name == 'user-posts'">Twoje posty</sidebar-link>
+                </li>
+                <li>
+                    <sidebar-link :href="'user-events'" :active="$route.name == 'user-events'">Twoje wydarzenia</sidebar-link>
+                </li>
+                <li>
+                <sidebar-link :href="'favorite-post'" :active="$route.name == 'favorite-post'">Ulubione posty</sidebar-link>
+                </li>
+                <li>
+                <sidebar-link :href="'favorite-user'" :active="$route.name == 'favorite-user'">Obserwani</sidebar-link>
+                </li>
+                <li>
+                <sidebar-link :href="'user-event-member'" :active="$route.name == 'user-event-member'">Wydarzenia, w których chcesz wziąć udział</sidebar-link>
+                </li>
+                <li>
+                <sidebar-link :href="'chat'" :active="$route.name == 'chat'">Czat ogólny</sidebar-link>
+                </li>
+                <li>
+                <sidebar-link :href="'chat-one-to-one'" :active="$route.name == 'chat-one-to-one'">Wiadomości</sidebar-link>
+                </li>
+                <li>
+                    <router-link :to="{ name: 'home' }">Powrót na stronę</router-link>
+                </li>
+                <li>
+                    <a v-on:click="logout" v-if="isLoggedIn" style="cursor: pointer">Wyloguj</a>
+                </li>
+            </ul>
+        </aside>
+        <div class="lg:col-start-2 lg:col-span-5 px-3">
+            <main id="content" class="pt-4">
+                <slot></slot>
+            </main>
         </div>
-        <ul class="sidebar-navigation">
-            <li>
-                <sidebar-link :href="'user-data'" :active="$route.name == 'user-data'">Dane użytkownika</sidebar-link>
-            </li>
-            <li>
-                <sidebar-link :href="'user-posts'" :active="$route.name == 'user-posts'">Twoje posty</sidebar-link>
-            </li>
-            <li>
-                <sidebar-link :href="'user-events'" :active="$route.name == 'user-events'">Twoje wydarzenia</sidebar-link>
-            </li>
-            <li>
-            <sidebar-link :href="'favorite-post'" :active="$route.name == 'favorite-post'">Ulubione posty</sidebar-link>
-            </li>
-            <li>
-            <sidebar-link :href="'favorite-user'" :active="$route.name == 'favorite-user'">Ulubioni użytkownicy</sidebar-link>
-            </li>
-            <li>
-            <sidebar-link :href="'user-event-member'" :active="$route.name == 'user-event-member'">Wydarzenia, w których chcesz wziąć udział</sidebar-link>
-            </li>
-             <li>
-            <sidebar-link :href="'chat'" :active="$route.name == 'chat'">Czat ogólny</sidebar-link>
-            </li>
-            <li>
-            <sidebar-link :href="'chat-one-to-one'" :active="$route.name == 'chat-one-to-one'">Czat one-to-one</sidebar-link>
-            </li>
-            <li>
-                <router-link :to="{ name: 'home' }">Powrót na stronę</router-link>
-            </li>
-            <li>
-                <a v-on:click="logout" v-if="isLoggedIn" style="cursor: pointer">Wyloguj</a>
-            </li>
-        </ul>
-    </aside>
-    <div class="col-12 col-lg-10 offset-0 offset-lg-2 px-0">
-        <main id="content" class="pt-4">
-            <slot></slot>
-        </main>
-        <footer class="site-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <h6>My Passion</h6>
+        <footer class="site-footer mt-auto bg-red-500 w-full bottom-0">
+            <div class="container mx-auto pb-3">
+                <div class="grid grid-cols-1 md:grid-cols-4">
+                    <div class="col-span-2">
+                        <h5 class="text-xl pb-3">My Passion</h5>
                     </div>
-                    <div class="col-12 col-md-3">
-                        <h6>Informacje</h6>
+                    <div>
+                        <h5 class="text-xl pb-3">Informacje</h5>
                         <ul class="footer-links">
                             <li><p>ul. Najlepsza</p></li>
                             <li><p>22-333 Wymyślone Miasto</p></li>
                         </ul>
                     </div>
-                    <div class="col-12 col-md-3">
-                        <h6>Kontakt</h6>
+                    <div>
+                        <h5 class="text-xl pb-3">Kontakt</h5>
                         <ul class="footer-links">
                             <li><p>Telefon: +48 666 777 888</p></li>
                             <li><p>Email: <a href="mailto:mypassion@mypassion.pl">mypassion@mypassion.pl</a></p></li>
                         </ul>
                     </div>
                 </div>
-                <hr>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-sm-6 col-12">
-                        <p class="copyright-text">Copyright &copy; 2021</p>
-                    </div>
+            <hr>
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1">
+                    <p class="copyright-text my-2">Copyright &copy; 2021</p>
                 </div>
             </div>
         </footer>
     </div>
-</div>
 </template>
 <style lang="scss" scoped>
     #content {

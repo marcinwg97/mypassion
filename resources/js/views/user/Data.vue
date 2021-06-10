@@ -1,69 +1,70 @@
 <template>
     <user-layout>
         <div class="container">
-    <div id="success" style="display: none" class="alert alert-success" role="alert">
-        </div>
-        <form @submit="formSubmit" enctype="multipart/form-data">
-        <div class="profile-header-container">
+            <div id="success" style="display: none" class="alert alert-success" role="alert">
+            </div>
+            <form @submit="formSubmit" enctype="multipart/form-data">
+                <div class="profile-header-container">
                     <div class="profile-header-img text-center">
                         <img class="rounded-circle" v-bind:src="user.profile_img" style="height: 25%; width: 25%;" />
                         <!-- badge -->
                         <div class="custom-file">
-                    <!-- MOST IMPORTANT - SEE "ref" AND "@change" PROPERTIES -->
-                    <input type="file" class="form-control" v-on:change="onFileChange">
-                  </div>
-                        
+                            <!-- MOST IMPORTANT - SEE "ref" AND "@change" PROPERTIES -->
+                            <input type="file" class="form-control" v-on:change="onFileChange">
+                        </div>
                     </div>
                 </div>
                 <button class="btn btn-success">Zmień avatar</button>
-        </form>
-        <form class="col-12 col-lg-12" v-on:submit.prevent="editUser(user.id)">
-            <div class="form-group row">
-                
-                <div class="form-group col-12">
-                    <label for="title" class="col-form-label">Nazwa:</label>
-                    <div>
-                        <input class="form-control" type="text" name="name" v-model="user.name" required>
-                    </div>
-                </div>
-                <div class="form-group col-12">
-                    <label for="description" class="col-form-label">Biografia:</label>
-                    <div>
-                        <quill-editor v-model="user.description"
-                            class="mb-3"
-                            id="rich-text"
-                            rows="20"
-                            :options="editorOption"
-                            ref="myQuillEditor"
-                            @blur="onEditorBlur($event)"
-                            @focus="onEditorFocus($event)"
-                            @ready="onEditorReady($event)">
-                        </quill-editor>
-                    </div>
-                </div>
-                <div class="form-group col-12">
-                    <label for="facebook" class="col-form-label">Facebook:</label>
-                    <div>
-                        <input class="form-control" type="text" name="facebook_link" v-model="user.facebook_link">
-                    </div>
-                </div>
-                <div class="form-group col-12">
-                    <label for="instagram" class="col-form-label">Instagram:</label>
-                    <div>
-                        <input class="form-control" type="text" name="instagram_link" v-model="user.instagram_link">
-                    </div>
-                </div>
-                <div class="form-group col-12">
-                    <label for="twitter" class="col-form-label">Twitter:</label>
-                    <div>
-                        <input class="form-control" type="text" name="twitter_link" v-model="user.twitter_link" >
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Zapisz</button>
-            </div>
-        </form>
-    </div>
+            </form>
+            <form class="col-12 col-lg-12" v-on:submit.prevent="editUser(user.id)">
+                <div class="form-group row">
 
+                    <div class="form-group col-12">
+                        <label for="title" class="col-form-label">Nazwa:</label>
+                        <div>
+                            <input class="rounded-sm px-3 py-2 mt-3 focus:outline-none bg-gray-100 w-full lg:w-1/2" type="text" name="name" v-model="user.name" required>
+                        </div>
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="description" class="col-form-label">Biografia:</label>
+                        <div>
+                            <quill-editor v-model="user.description"
+                                class="mb-3 bg-white"
+                                id="rich-text"
+                                rows="20"
+                                :options="editorOption"
+                                ref="myQuillEditor"
+                                @blur="onEditorBlur($event)"
+                                @focus="onEditorFocus($event)"
+                                @ready="onEditorReady($event)">
+                            </quill-editor>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl">
+                        Social media
+                    </h3>
+                    <div class="form-group">
+                        <label for="facebook" class="col-form-label">Facebook:</label>
+                        <div>
+                            <input class="rounded-sm px-3 py-2 mt-3 focus:outline-none bg-gray-100 w-full lg:w-1/2" type="text" name="facebook_link" v-model="user.facebook_link">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="instagram" class="col-form-label">Instagram:</label>
+                        <div>
+                            <input class="rounded-sm px-3 py-2 mt-3 focus:outline-none bg-gray-100 w-full lg:w-1/2" type="text" name="instagram_link" v-model="user.instagram_link">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="twitter" class="col-form-label">Twitter:</label>
+                        <div>
+                            <input class="rounded-sm px-3 py-2 mt-3 focus:outline-none bg-gray-100 w-full lg:w-1/2" type="text" name="twitter_link" v-model="user.twitter_link" >
+                        </div>
+                    </div>
+                    <button type="submit" class="mb-3 bg-transparent border border-gray-500 hover:border-indigo-500 text-gray-500 hover:text-indigo-500 font-bold py-1 px-2 rounded-full">Zapisz</button>
+                </div>
+            </form>
+        </div>
     </user-layout>
 </template>
 <style scoped>
@@ -109,7 +110,7 @@
     import 'quill/dist/quill.bubble.css'
     import { quillEditor, Quill } from 'vue-quill-editor'
     import ImageResize from 'quill-image-resize';
-     import UserLayout from '@views/layout/User'
+    import UserLayout from '@views/layout/User'
 
     // Register ImageResize module
     Quill.register('modules/imageResize', ImageResize);
@@ -169,7 +170,8 @@
                             },
                             modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
                         }
-                    }
+                    },
+                    placeholder: 'Wpisz treść...'
                 },
             }
         },
@@ -211,11 +213,11 @@
             formSubmit(e) {
                 e.preventDefault();
                 let currentObj = this;
-   
+
                 const config = {
                     headers: { 'content-type': 'multipart/form-data' }
                 }
-    
+
                 let formData = new FormData();
                 formData.append('file', this.avatar);
                 axios.post('/api/user/avatar', formData, config)

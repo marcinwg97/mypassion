@@ -2,7 +2,7 @@ import VueRouter from 'vue-router'
 window.Vue = require('vue');
 Vue.use(require('vue-resource'));
 Vue.component('pagination', require('laravel-vue-pagination'));
-import 'bootstrap';
+// import 'bootstrap';
 import App from './views/App'
 import Dashboard from './views/admin/Board'
 import Login from './views/auth/Login'
