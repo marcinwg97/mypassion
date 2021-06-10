@@ -1,10 +1,10 @@
 <template>
 <div style="position: relative; min-height: 100vh; flex-direction: column; display: flex">
     <nav class="bg-yellow-100 shadow" role="navigation">
-        <div class="container mx-auto py-4 flex flex-wrap items-center md:flex-no-wrap">
+        <div class="container mx-auto py-3 flex flex-wrap items-center md:flex-no-wrap">
             <div class="mr-4 md:mr-8">
                 <router-link :to="{name: 'home'}" class="navbar-brand">
-                    <img class="h-11 w-30" src="/img/logo.png" alt="">
+                    <img class="h-20" src="/img/logo.svg" alt="">
                 </router-link>
             </div>
             <div class="ml-auto md:hidden">
