@@ -1,21 +1,18 @@
 <template>
   <user-layout>
-    <div class="container">
-        <div class="row bg-purple-200" style="padding-bottom: 20px;padding-top:20px;margin-left:0px;margin-right:0px">
-            <div class="col-4">
-                <div class="p-2">
-                    <!-- <a href="">{{user.name}}</a> -->
-                    <ul class="list-group">
-                        <li class="list-group-item" @click.prevent="openChat(user), getMessages(user), getMessagesSent(user), unreadMessages(user)" :key=user.id v-for="user in users">
-                            <a href="">{{user.name}}</a>
-                            <span v-for="count_message in count_messages" :key="count_message" v-if="user.id===count_message.from_user && count_message.status==1">
-                               <img src="https://pics.freeicons.io/uploads/icons/png/15378291991558965373-512.png" alt="message icon" style="width:30px; display:inline">
-                            </span>
-                        </li>
-                    </ul>
-                </div>
+    <div class="row-span-full h-full">
+        <div class="grid grid-cols-5 h-full bg-white">
+            <div class="border-r-2 border-red-300">
+                <ul>
+                    <li class="px-3 py-2 shadow-sm" @click.prevent="openChat(user), getMessages(user), getMessagesSent(user), unreadMessages(user)" :key=user.id v-for="user in users">
+                        <a href="">{{user.name}}</a>
+                        <span v-for="count_message in count_messages" :key="count_message" v-if="user.id===count_message.from_user && count_message.status==1">
+                            <img src="https://pics.freeicons.io/uploads/icons/png/15378291991558965373-512.png" alt="message icon" style="width:30px; display:inline">
+                        </span>
+                    </li>
+                </ul>
             </div>
-            <div>
+            <div class="col-span-4 pl-3">
                 <div class="row">
                     <div>
                         <div v-for="message_from in messages" :key="message_from">
@@ -50,7 +47,6 @@ export default {
             messages:[],
             sent_messages:[],
             count_messages:[],
-
         };
     },
     mounted() {

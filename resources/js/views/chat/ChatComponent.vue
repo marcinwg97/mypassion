@@ -1,6 +1,6 @@
 <template>
   <user-layout>
-    <div class="container">
+    <div class="container grid grid-cols-4">
         <div class="bg-white p-3">
             <div v-for="message in messages" :key="message.id">
                 <label>{{message.title}}</label>

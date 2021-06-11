@@ -1,6 +1,6 @@
 <template>
     <div class="grid grid-cols-1 lg:grid-cols-6">
-        <aside class="sidebar-container px-0 lg:w-1/6 w-full">
+        <aside class="sidebar-container px-0 w-full">
             <div class="sidebar-logo">
                 MyPassion
             </div>
@@ -37,12 +37,12 @@
                 </li>
             </ul>
         </aside>
-        <div class="lg:col-start-2 lg:col-span-5 px-3">
-            <main id="content" class="pt-4">
+        <div class="lg:col-span-5">
+            <main id="content">
                 <slot></slot>
             </main>
         </div>
-        <footer class="site-footer mt-auto bg-red-500 w-full bottom-0">
+        <footer class="site-footer mt-auto bg-red-500 w-full bottom-0 lg:col-span-full">
             <div class="container mx-auto pb-3">
                 <div class="grid grid-cols-1 md:grid-cols-4">
                     <div class="col-span-2">
@@ -75,15 +75,10 @@
 </template>
 <style lang="scss" scoped>
     #content {
-        min-height: 100vh;
-    }
-    footer {
-        position: absolute;
+        min-height: 85vh;
+        height: 1px;
     }
     @media(max-width: 991px) {
-        footer {
-            position: relative;
-        }
         .sidebar-container {
             position: relative;
         }
