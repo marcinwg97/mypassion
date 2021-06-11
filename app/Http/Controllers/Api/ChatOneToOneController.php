@@ -12,19 +12,16 @@ class ChatOneToOneController extends Controller
 {
     public function index()
     {
-        return response()->json(User::where('id','!=', auth()->id())->get()->toArray()); 
+        return response()->json(User::where('id','!=', auth()->id())->get()->toArray());
     }
 
     public function send_message(Request $request)
     {
-        $message = $request->message;
-        $to_user = $request->to_user;
-
         $chat = new Chat;
-        $chat->message=$message;
-        $chat->from_user=auth()->id();
-        $chat->to_user=$to_user;
-        $chat->status = 1;
+        $chat->message      =   $request->message;
+        $chat->from_user    =   auth()->id();
+        $chat->to_user      =   $request->to_user;
+        $chat->status       =   1;
 
         $chat->save();
     }
